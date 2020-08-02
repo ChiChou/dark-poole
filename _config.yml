@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-# Permalinks
-permalink: pretty
-
-# Setup
-title: Poole
-tagline: The Jekyll Butler
-url: http://andrewhwanpark.github.io/dark-poole/
-paginate: 1
-baseurl: ""
-
-# Assets
-#
-# We specify the directory for Jekyll so we can use @imports.
-sass:
-  sass_dir: _sass
-  style: :compressed
-=======
 # Setup
 title: Dark Poole
 url: https://getpoole.com
@@ -44,7 +26,6 @@ sass:
   style: :compressed
 
 # Options
->>>>>>> master
 
 # Replace this value and uncomment to enable Google Analytics tracking
 # ga_analytics: UA-000000-0
@@ -56,11 +37,6 @@ author:
   email: markdotto@gmail.com
 
 # Custom vars
-<<<<<<< HEAD
-version: 2.0.0
-github:
-  repo: https://github.com/poole/poole
-=======
 version: 3.0.0
 
 # Navbar page list
@@ -73,4 +49,3 @@ nav:
 
   - title: Feed
     url: /atom.xml
->>>>>>> master
