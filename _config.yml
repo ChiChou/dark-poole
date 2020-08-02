@@ -1,6 +1,6 @@
 # Setup
 title: Dark Poole
-url: http://andrewhwanpark.github.io/dark-poole
+url: https://andrewhwanpark.github.io/dark-poole
 paginate: 1
 paginate_path: "/dark-poole/page:num/"
 baseurl: "/dark-poole"
