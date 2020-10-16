@@ -46,4 +46,8 @@ nav:
     url: /dark-poole/archive
 
   - title: About
+<<<<<<< HEAD
     url: /dark-poole/about
+=======
+    url: /about
+>>>>>>> master
