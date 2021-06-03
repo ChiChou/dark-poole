@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 962 532" style="enable-background:new 0 0 962 532;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#93C47D;stroke:#44546A;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st3{font-family:'ArialMT';}
+	.st4{font-size:24px;}
+	
+		.st5{fill-rule:evenodd;clip-rule:evenodd;fill:#EEEEEE;fill-opacity:0.3804;stroke:#44546A;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:4,3;}
+	.st6{font-size:16px;}
+	.st7{fill:#44546A;}
+	.st8{fill:#FFFFFF;stroke:#07080B;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st9{fill:#FF0000;}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="-159" y="-130" width="1280" height="720"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<rect x="-159" y="-130" class="st1" width="1280" height="720"/>
+		<rect x="47.5" y="443.5" class="st2" width="880" height="54"/>
+		<text transform="matrix(1 0 0 1 402.098 478)" class="st3 st4">Renderer Process</text>
+		<path class="st5" d="M351.5,406.1c0-3.6,2.9-6.6,6.6-6.6h577.8c3.6,0,6.6,2.9,6.6,6.6v97.8c0,3.6-2.9,6.6-6.6,6.6H358.1
+			c-3.6,0-6.6-2.9-6.6-6.6V406.1z"/>
+		<text transform="matrix(1 0 0 1 605.61 433)" class="st3 st4">sandbox</text>
+		<text transform="matrix(1 0 0 1 280.684 304)" class="st3 st6">4.sandbox_init</text>
+		<text transform="matrix(1 0 0 1 280.684 323)" class="st3 st6">_with_paramete</text>
+		<text transform="matrix(1 0 0 1 338.684 342)" class="st3 st6">rs</text>
+		<path class="st7" d="M349,345.5v36.7h-1v-36.7H349z M352.5,380.9l-4,8l-4-8H352.5z"/>
+		<rect x="56.5" y="25.5" class="st8" width="871" height="53"/>
+		<text transform="matrix(1 0 0 1 451.713 59)" class="st3 st4">cfprefsd</text>
+		<path d="M163,435l-1-329.8l1,0l1,329.8L163,435z M158.5,106.5l4-8l4,8L158.5,106.5z"/>
+		<text transform="matrix(1 0 0 1 24.028 201)" class="st3 st6">1. </text>
+		<text transform="matrix(1 0 0 1 24.028 220)" class="st3 st6">CFPreferences</text>
+		<text transform="matrix(1 0 0 1 24.028 239)" class="st3 st6">CopyAppValue</text>
+		<path d="M182,428.3l-1-329.8l1,0l1,329.8L182,428.3z M186.5,427l-4,8l-4-8L186.5,427z"/>
+		<text transform="matrix(1 0 0 1 206.047 157)" class="st3 st6">2.sandbox_check, </text>
+		<text transform="matrix(1 0 0 1 206.047 176)" class="st3 st6">no sandbox</text>
+		<text transform="matrix(1 0 0 1 206.047 227)" class="st9 st3 st6">3.mark as &quot;not </text>
+		<text transform="matrix(1 0 0 1 206.047 246)" class="st9 st3 st6">sandboxed&quot;</text>
+		<path class="st7" d="M722,429l-1-329.8l1,0l1,329.8L722,429z M717.5,100.5l4-8l4,8L717.5,100.5z"/>
+		<path class="st7" d="M741,422.3l-1-329.8l1,0l1,329.8L741,422.3z M745.5,421l-4,8l-4-8L745.5,421z"/>
+		<text transform="matrix(1 0 0 1 570.824 217)" class="st3 st6">5. </text>
+		<text transform="matrix(1 0 0 1 570.824 236)" class="st3 st6">CFPreferences</text>
+		<text transform="matrix(1 0 0 1 570.824 255)" class="st3 st6">SetAppValue</text>
+		<text transform="matrix(1 0 0 1 769.207 213)" class="st9 st3 st6">6. I have </text>
+		<text transform="matrix(1 0 0 1 769.207 232)" class="st9 st3 st6">checked the </text>
+		<text transform="matrix(1 0 0 1 769.207 251)" class="st9 st3 st6">sandbox state, </text>
+		<text transform="matrix(1 0 0 1 769.207 271)" class="st9 st3 st6">go ahead</text>
+	</g>
+</g>
+</svg>

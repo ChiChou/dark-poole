@@ -1,9 +1,9 @@
 # Setup
-title: Dark Poole
-url: https://andrewhwanpark.github.io/dark-poole
+title: CodeColorist
+url: https://blog.chichou.me
 paginate: 1
-paginate_path: "/dark-poole/page:num/"
-baseurl: "/dark-poole"
+paginate_path: "/page:num/"
+baseurl: "/"
 permalink: pretty
 
 # Gems
@@ -33,9 +33,8 @@ sass:
 
 # Specify the author for blog posts
 author:
-  name: Mark Otto
-  url: https://twitter.com/mdo
-  email: markdotto@gmail.com
+  name: CodeColorist
+  url: https://twitter.com/codecolorist
 
 # Custom vars
 version: 3.0.0
@@ -43,7 +42,7 @@ version: 3.0.0
 # Navbar page list
 nav:
   - title: Blog
-    url: /dark-poole/archive
+    url: /archive
 
   - title: About
-    url: /dark-poole/about
+    url: /about
