@@ -2,7 +2,6 @@
 layout:	post
 title:	"X Site eScape (Part II): Look Up a Shell in the Dictionary"
 date: 2020-08-06
-image: /img/urs-JSS0bQiT9Wd9gwzA-A.png
 show_excerpt: true
 ---
 
