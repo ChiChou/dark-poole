@@ -16,7 +16,15 @@ title: Home
       >{{ post.date | date_to_string }}</time
     >
 
-    {{ post.content }}
+    {% if post.image %}
+      <p><img src="{{ post.image }}"></p>
+    {% endif %}
+
+    {% if post.show_excerpt %}
+      {{ post.excerpt }}
+
+      <a href="{{ post.url }}" class="post-more">Continue</a>
+    {% endif %}
   </article>
   {% endfor %}
 </div>

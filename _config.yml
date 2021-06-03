@@ -1,10 +1,16 @@
 # Setup
-title: CodeColorist
-url: https://blog.chichou.me
-paginate: 1
 paginate_path: "/page:num/"
-baseurl: "/"
 permalink: pretty
+
+title:            CodeColorist
+tagline:          'Final Lullaby'
+description:      'Close your eyes and I put us to sleep'
+url:              https://chichou.github.io
+
+author:
+  name:           'CodeColorist'
+
+paginate:         5
 
 # Gems
 plugins:
@@ -41,7 +47,7 @@ version: 3.0.0
 
 # Navbar page list
 nav:
-  - title: Blog
+  - title: Archive
     url: /archive
 
   - title: About
