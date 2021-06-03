@@ -13,8 +13,14 @@
 }
 
 // Blog post or page title
+.post-title {
+  font-weight: 100;
+}
+
 .page-title,
 .post-title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
   color: var(--heading-color);
 }
 .page-title,
