@@ -2,7 +2,7 @@
 layout: post
 title: "See No Eval: Runtime Dynamic Code Execution in Objective-C"
 date: 2021-01-16
-image: /img/see-no-eval.png
+image: /img/see-no-eval/headline.png
 show_excerpt: true
 ---
 
