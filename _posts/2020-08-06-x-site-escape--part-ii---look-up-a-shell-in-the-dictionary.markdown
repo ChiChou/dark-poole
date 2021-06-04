@@ -22,7 +22,7 @@ The demo below is chained with [LinusHenze/WebKit-RegEx-Exploit](https://github.
 
 Sometimes the system pulls OTA resources from mesu.apple.com. This OTA component is implemented by the private framework MobileAsset and mobileassetd daemon. Interestingly, it's accessible in WebProcess sandbox.
 
-<https://github.com/WebKit/webkit/blob/d7468a70f/Source/WebKit/WebProcess/com.apple.WebProcess.sb.in#L601>
+[Source/WebKit/WebProcess/com.apple.WebProcess.sb.in#L601](https://github.com/WebKit/webkit/blob/d7468a70f/Source/WebKit/WebProcess/com.apple.WebProcess.sb.in#L601)
 
 ```lisp
 (global-name "com.apple.mobileassetd")
