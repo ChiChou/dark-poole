@@ -211,11 +211,11 @@ Dictionary just happend to be dynamically updatable by OTA. So I can use the pre
 
 Still one thing left to do. How am I supposed to jump from Safari to Dictionary? URL scheme? But it prompts like this. It's unacceptable.
 
-![](/img/xss-part2/propmpt.png)
+![](/img/xss-part2/prompt.png)
 
 There is a nice feature in Safari that you can look up a word in a QuickView fasion.
 
-![](/img/xss-part2/prompt.png)
+![](/img/xss-part2/quickview.png)
 
 This floating window is triggable from WebProcess IPC by invoking `WebKit::WebPage::performDictionaryLookupOfCurrentSelection()`. It doesn't ask user for permission.
 
