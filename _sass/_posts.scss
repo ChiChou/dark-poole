@@ -6,7 +6,7 @@
 .page,
 .post {
   margin-top: 2rem;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
 
   li + li {
     margin-top: .25rem;
@@ -94,5 +94,38 @@
     small {
       color: var(--gray-600);
     }
+  }
+}
+
+.featured {
+  font-family: 'Roboto', sans-serif;
+
+  background: #131313;
+  background-image: url('/public/ocean.jpg');
+  background-size: cover;
+  background-position: center;
+
+  text-shadow: 2px 2px 4px #13131335;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  text-align: left;
+  min-height: 50vh;
+
+  h1 {
+    font-weight: 100;
+    font-size: 3rem;
+  }
+
+  p {
+    max-width: 28em;
+    font-weight: 300;
+  }
+
+  nav {
+    margin-top: 5rem;
+  }
+
+  nav a {
+    margin-right: 2rem;
   }
 }
