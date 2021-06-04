@@ -5,6 +5,7 @@
 
 .page,
 .post {
+  margin-top: 2rem;
   margin-bottom: 4em;
 
   li + li {
@@ -12,12 +13,23 @@
   }
 }
 
+.posts {
+  display: grid;
+  grid-row-gap: 4rem;
+  grid-column-gap: 4rem;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 45%);
+}
+
+@media (max-width: 44rem) {
+  .posts {
+    display: block;
+  }
+}
+
 // Blog post or page title
 .post-title {
   font-weight: 100;
-  border-left: 10px solid #f44336;
-  margin-left: -2rem;
-  padding-left: 1rem;
 }
 
 .page-title,

@@ -14,3 +14,43 @@ footer {
   margin-top: var(--spacer-3);
   margin-bottom: var(--spacer-3);
 }
+
+header.master {
+  background: #0000003d;
+  padding: 1rem 0;
+
+  .content { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .logo {
+    h3 {
+      margin: 0;
+    }
+    
+    a {
+      font-weight: 100;
+      font-size: 1.5rem;
+      background: -webkit-linear-gradient(290deg, #09009f, #00ff95 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  nav {
+    display: block;
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.about {
+  margin-top: 2rem;
+}
