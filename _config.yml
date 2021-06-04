@@ -10,7 +10,7 @@ url:              https://chichou.github.io
 author:
   name:           'CodeColorist'
 
-paginate:         5
+paginate:         6
 
 # Gems
 plugins:
