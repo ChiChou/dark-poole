@@ -60,6 +60,16 @@
   color: var(--gray-600);
 }
 
+.thumbnail {
+  overflow: hidden;
+  
+  img {
+    transition: transform .2s ease-in-out;
+  }
+  &:hover > img {
+    transform: scale(1.05);
+  }
+}
 
 // Related posts
 .related {

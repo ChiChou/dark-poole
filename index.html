@@ -17,13 +17,13 @@ title: Home
     >
 
     {% if post.image %}
-      <p><img src="{{ post.image }}"></p>
+      <p><div class="thumbnail"><img src="{{ post.image }}"></div></p>
     {% endif %}
 
     {% if post.show_excerpt %}
       {{ post.excerpt }}
 
-      <a href="{{ post.url }}" class="post-more">Continue</a>
+      <a href="{{ post.url }}" class="post-more">Continue Reading</a>
     {% endif %}
   </article>
   {% endfor %}
