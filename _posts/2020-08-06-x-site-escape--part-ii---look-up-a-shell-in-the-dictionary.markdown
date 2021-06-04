@@ -161,7 +161,7 @@ a.href = 'file:///Applications/Calculator.app';
 a.click()
 ```
 
-![](/img/urs-JSS0bQiT9Wd9gwzA-A.png)
+![](/img/xss-part2/calc.png)
 
 Wait, how does this even happen?
 
@@ -169,17 +169,41 @@ This delegate method handles navigation for the WebView:
 
 `Dictionary -[DictionaryController webView:decidePolicyForNavigationAction:request:frame:decisionListener:]:`
 
-![](/img/decide-nativation.png)
+```objc
+element = objc_msgSend(action, "objectForKey:", WebActionElementKey);
+linkURL = objc_msgSend(element, "objectForKey:", WebElementLinkURLKey);
+frameName = objc_msgSend(frame, "name");
+```
 
 From the code above, only onclick event on an anchor can trigger this behavior. Traditional location redirection won't work in this case!
 
-Before 10.15 Dev Beta, you see the file:/// URL would be sent to -[NSWorkspace openURL:] , which is a well known vector for executing local applications:
+Before 10.15 Dev Beta, file:/// URL would be sent to `-[NSWorkspace openURL:]` , which is a well known vector for executing local applications.
 
-![](/img/CZi9eFLW62-uz6S8KiMBig.png)
+```objc
+scheme = objc_msgSend(linkURL, "scheme");
+// ...
+if (objc_msgSend(scheme, "isEqualToString:", CFSTR("dictionary")) || objc_msgSend(scheme, "isEqualToString:", CFSTR("x-dictionary")) ) {
+    // ...
+} else if ( !objc_msgSend(identifier, "hasPrefix:", CFSTR("com.apple.dictionary.Wikipedia"))
+        || objc_msgSend(scheme, "isEqualToString:", CFSTR("http"))
+        || objc_msgSend(scheme, "isEqualToString:", CFSTR("https")) )
+{
+    workspace = objc_msgSend(&OBJC_CLASS___NSWorkspace, "sharedWorkspace");
+    objc_msgSend(workspace, "openURL:", v46);
+}
+objc_msgSend(listener, "ignore");
+```
 
 Don't know if this patch is intentional, but it breaks my exploit indeed. Now file:/// URL is no more qualified for this behavior:
 
-![](/img/EZp2CAfBQ8h7JTsL1cdVOA.png)
+```objc
+else if (objc_msgSend(scheme, "isEqualToString:", CFSTR("http"))
+        || objc_msgSend(scheme, "isEqualToString:", CFSTR("https")) )
+{
+    workspace = objc_msgSend(&OBJC_CLASS___NSWorkspace, "sharedWorkspace");
+    objc_msgSend(workspace, "openURL:", v46);
+}
+```
 
 Dictionary just happend to be dynamically updatable by OTA. So I can use the previous design issue to install malformed dictionary asset from a compromised Safari renderer process.
 
@@ -187,11 +211,11 @@ Dictionary just happend to be dynamically updatable by OTA. So I can use the pre
 
 Still one thing left to do. How am I supposed to jump from Safari to Dictionary? URL scheme? But it prompts like this. It's unacceptable.
 
-![](/img/5JCbX5PkzHcXf1-oiSriHw.png)
+![](/img/xss-part2/propmpt.png)
 
 There is a nice feature in Safari that you can look up a word in a QuickView fasion.
 
-![](/img/W-EcHJmnOS1JPXdHbi63zw.png)
+![](/img/xss-part2/prompt.png)
 
 This floating window is triggable from WebProcess IPC by invoking `WebKit::WebPage::performDictionaryLookupOfCurrentSelection()`. It doesn't ask user for permission.
 
@@ -225,7 +249,7 @@ Use `dict://ExploitStage2` to finally open Dictionary app and load the second st
 
 ## Full Sandbox Escape
 
-![](/img/dict-sbx-diagram.svg)
+![](/img/xss-part2/dict-sbx-diagram.svg)
 
 Since the MobileAssets framework does not set com.apple.quarantine attribute, we can just put an executable `.app` bundle and execute it. I've tried `.terminal` and `.command` as well. It didn't work because Dictionary app has a `com.apple.security.app-sandbox` entitlement, with whom the Terminal app will decline to open the file.
 
