@@ -34,6 +34,7 @@
 
 .page-title,
 .post-title {
+  font-family: 'Roboto', sans-serif;
   font-size: 3rem;
   margin-bottom: 2rem;
   color: var(--heading-color);
@@ -50,6 +51,10 @@
   &:focus {
     text-decoration: underline;
   }
+}
+
+.excerpt {
+  font-family: 'Roboto', sans-serif;
 }
 
 // Meta data line below post title
@@ -127,5 +132,14 @@
 
   nav a {
     margin-right: 2rem;
+  }
+}
+
+.projects {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin: 2rem 0;
   }
 }

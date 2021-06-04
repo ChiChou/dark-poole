@@ -22,9 +22,10 @@ title: Home
     {% endif %}
 
     {% if post.show_excerpt %}
-      {{ post.excerpt }}
-
-      <a href="{{ post.url }}" class="post-more">Continue Reading</a>
+      <div class="excerpt">
+        {{ post.excerpt }}
+        <a href="{{ post.url }}" class="post-more">Continue Reading</a>
+      </div>
     {% endif %}
   </article>
   {% endfor %}
