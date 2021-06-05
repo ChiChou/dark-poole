@@ -6,7 +6,7 @@ image: /img/knockknock.png
 show_excerpt: true
 ---
 
-This blog does not involve any vulnerability, but I hope the readers can find these tricks useful for red teaming and anti-malware.
+This blog does not involve any vulnerability, but I hope the readers can find these tricks useful for red teaming and malware defense.
 
 Since Mojave (10.14), [Hardened Runtime](https://developer.apple.com/documentation/security/hardened_runtime_entitlements?language=objc) has been introduced to bring global Library Validation enforcement, which prohibits dynamic libraries without valid code signature from the same developer or Apple from being loaded.
 
