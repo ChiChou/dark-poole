@@ -8,7 +8,7 @@
     <nav>
       {% for page in site.links %}
         <a class="sidebar-nav-item" target="_blank" href="{{ page[1] }}" rel="noopener" title="{{ page[0] }}">
-          <img src="/public/{{ page[0] | downcase }}.svg" width="48" height="48" alt="{{ page[0] }}" class="link">
+          <img src="/assets/{{ page[0] | downcase }}.svg" width="48" height="48" alt="{{ page[0] }}" class="link">
         </a>
       {% endfor %}
     </nav>
@@ -20,7 +20,7 @@
   <div class="list">
     <article>
       <h3>
-        <a href="https://github.com/chichou/grapefruit" target="_blank"><img width="240" src="/public/igf.svg"></a>
+        <a href="https://github.com/chichou/grapefruit" target="_blank"><img width="240" src="/assets/igf.svg"></a>
       </h3>
       <p>Grapefruit is an open source iOS app offensive testing tool, powered by
         <a target="_blank" href="https://frida.re/" rel="noopener" target="_blank">frida</a> and 

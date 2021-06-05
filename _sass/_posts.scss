@@ -110,9 +110,9 @@
   }
 
   background: #131313;
-  background-image: url('/public/background-uhd.jpg');
+  background-image: url('/assets/background-uhd.jpg');
   @media (max-width: 30rem) {
-    background-image: url('/public/background-mobile.jpg');
+    background-image: url('/assets/background-mobile.jpg');
   }
   background-size: cover;
   background-position: center;
