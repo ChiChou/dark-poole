@@ -20,7 +20,7 @@ image: /assets/apple-touch-icon-precomposed.png
     >
 
     {% if post.image %}
-      <p><div class="thumbnail"><img src="{{ post.image }}"></div></p>
+      <p><div class="thumbnail"><img src="{{ post.image }}" alt="{{ post.title }}"></div></p>
     {% endif %}
 
     {% if post.show_excerpt %}
