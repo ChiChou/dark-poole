@@ -26,9 +26,9 @@ image: /assets/apple-touch-icon-precomposed.png
     {% if post.show_excerpt %}
       <div class="excerpt">
         {{ post.excerpt }}
-        <a href="{{ post.url }}" class="post-more">Continue Reading</a>
       </div>
     {% endif %}
+    <a href="{{ post.url }}" class="post-more">Continue Reading</a>
   </article>
   {% endfor %}
 </div>
