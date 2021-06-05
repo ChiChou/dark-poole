@@ -13,7 +13,7 @@
 
         <nav class="nav">
           {% for nav in site.nav %}
-          <small><a href="{{ nav.url }}">{{ nav.title }}</a></small>
+          <a href="{{ nav.url }}">{{ nav.title }}</a>
           {% endfor %}
         </nav>
       </div>
