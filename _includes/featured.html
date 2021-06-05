@@ -15,7 +15,7 @@
   </div>
 </section>
 
-<section class="content container projects">
+<section class="content container projects section">
   <h2>Projects</h2>
   <div class="list">
     <article>
@@ -44,5 +44,16 @@
       <h3><a target="_blank" rel="noopener" href="https://github.com/ChiChou/GlobalWebInspect">Global WebInspect</a></h3>
       <p>Enable WebInspect globally, allowing frontend debugging for third party apps on jailbroken devices</p>
     </article>    
+  </div>
+</section>
+
+<section class="container slides section">
+  <h2>Presentations</h2>
+  <div class="list">
+    {% for s in site.slides %}
+    <a href="{{ s.url }}" target="_blank" rel="noopener" title="{{ s.title }}">
+      <img alt="{{ s.title }}" src="/img/slides/{{ s.img }}" width="320">
+    </a>
+    {% endfor %}
   </div>
 </section>

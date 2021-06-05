@@ -189,10 +189,12 @@
   }
 }
 
-.projects {
+.section {
   margin-top: 6rem;
   margin-bottom: 8rem;
+}
 
+.projects {
   .list {
     display: grid;
     grid-row-gap: 1rem;
@@ -205,4 +207,17 @@
     }
   }
 
+}
+
+.slides {
+  .list {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    
+    a {
+      display: inline-block;
+      margin: 2rem 2rem 0 0;
+    }
+  }
 }
