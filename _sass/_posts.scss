@@ -111,19 +111,25 @@
 
   background: #131313;
   background-image: url('/assets/background-uhd.jpg');
+  @media (min-width: 30rem) and (max-width: 60rem) {
+    background-image: url('/assets/background-hd.jpg');
+  }
   @media (max-width: 30rem) {
     background-image: url('/assets/background-mobile.jpg');
   }
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
 
-  text-shadow: 2px 2px 4px #13131335;
+  text-shadow: 1px 1px 2px #2d2d2d98;
   text-align: left;
   min-height: 50vh;
 
   h1 {
     font-weight: 100;
     font-size: 3rem;
+    @media (max-width: 30rem) {
+      font-size: 2rem;
+    }
   }
 
   p {
