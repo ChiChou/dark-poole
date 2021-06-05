@@ -28,6 +28,11 @@ exclude:
   - LICENSE.md
   - README.md
 
+links:
+  twitter:     https://twitter.com/codecolorist
+  GitHub:      https://github.com/chichou
+  Patreon:     https://patreon.com/codecolorist
+
 sass:
   sass_dir: _sass
   style: :compressed

@@ -104,6 +104,12 @@
 
 .featured {
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+
+  .content {
+    flex: 1;
+  }
 
   background: #131313;
   background-image: url('/public/background-uhd.jpg');
@@ -114,8 +120,6 @@
   background-position: center;
 
   text-shadow: 2px 2px 4px #13131335;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
   text-align: left;
   min-height: 50vh;
 
@@ -134,7 +138,19 @@
   }
 
   nav a {
+    text-decoration: none;
     margin-right: 2rem;
+
+    img {
+      display: inline-block;
+      opacity: .7;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
   }
 }
 

@@ -1,14 +1,16 @@
 <section class="featured">
   <div class="content container">
     <h1>Hi, this is Zhi</h1>
-    <p>Amateur photographer. Security research on various platforms, 
-      especially fruity operating systems. 
+    <p>Amateur photographer. Security research on various platforms,
+      especially fruity operating systems.
       Pwned several targets.</p>
 
     <nav>
-      <a target="_blank" href="https://twitter.com/codecolorist">Twitter</a>
-      <a target="_blank" href="https://github.com/chichou/">GitHub</a>
-      <a target="_blank" href="https://www.patreon.com/codecolorist">Patreon</a>
+      {% for page in site.links %}
+        <a class="sidebar-nav-item" target="_blank" href="{{ page[1] }}" rel="noopener" title="{{ page[0] }}">
+          <img src="/public/{{ page[0] | downcase }}.svg" width="48" height="48" alt="{{ page[0] }}" class="link">
+        </a>
+      {% endfor %}
     </nav>
   </div>
 </section>
