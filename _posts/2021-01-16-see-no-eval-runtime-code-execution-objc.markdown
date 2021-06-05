@@ -2,7 +2,7 @@
 layout: post
 title: "See No Eval: Runtime Dynamic Code Execution in Objective-C"
 date: 2021-01-16
-image: /img/see-no-eval/headline.png
+image: /img/2021-01-16-see-no-eval-runtime/headline.png
 show_excerpt: true
 ---
 
@@ -30,7 +30,7 @@ Here is an example:
 
 It's gonna be translated to the following abstract syntax tree. The execution is directly on this tree, no byte code or just-in-time compilation involved.
 
-[![Abstract Syntax Tree](/img/see-no-eval/nspredicate-ast.svg)](/img/see-no-eval/nspredicate-ast.svg)
+[![Abstract Syntax Tree](/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg)](/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg)
 
 NSExpression can be an operand of another NSPredicate instance, or used independently. In fact, the initializer of NSExpression simplys creates a new NSPredicate and returns one of the operand.
 

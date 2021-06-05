@@ -161,7 +161,7 @@ a.href = 'file:///Applications/Calculator.app';
 a.click()
 ```
 
-![](/img/xss-part2/calc.png)
+![](/img/2020-08-06-x-site-escape-part/calc.png)
 
 Wait, how does this even happen?
 
@@ -211,11 +211,11 @@ Dictionary just happend to be dynamically updatable by OTA. So I can use the pre
 
 Still one thing left to do. How am I supposed to jump from Safari to Dictionary? URL scheme? But it prompts like this. It's unacceptable.
 
-![](/img/xss-part2/prompt.png)
+![](/img/2020-08-06-x-site-escape-part/prompt.png)
 
 There is a nice feature in Safari that you can look up a word in a QuickView fasion.
 
-![](/img/xss-part2/quickview.png)
+![](/img/2020-08-06-x-site-escape-part/quickview.png)
 
 This floating window is triggable from WebProcess IPC by invoking `WebKit::WebPage::performDictionaryLookupOfCurrentSelection()`. It doesn't ask user for permission.
 
@@ -249,7 +249,7 @@ Use `dict://ExploitStage2` to finally open Dictionary app and load the second st
 
 ## Full Sandbox Escape
 
-![](/img/xss-part2/dict-sbx-diagram.svg)
+![](/img/2020-08-06-x-site-escape-part/dict-sbx-diagram.svg)
 
 Since the MobileAssets framework does not set com.apple.quarantine attribute, we can just put an executable `.app` bundle and execute it. I've tried `.terminal` and `.command` as well. It didn't work because Dictionary app has a `com.apple.security.app-sandbox` entitlement, with whom the Terminal app will decline to open the file.
 
