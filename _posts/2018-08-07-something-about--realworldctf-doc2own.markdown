@@ -2,7 +2,7 @@
 layout:	post
 title:	"Something About #realworldctf doc2own"
 date:	2018-08-07
-image: /img/rwctf.png
+image: /img/2018-08-07-something-about-realworldctf-doc2own/rwctf.png
 show_excerpt: true
 ---
 
@@ -52,7 +52,7 @@ There was no special reason to choose Dash as this part. Dash is popular for dev
 
 You may think about directly reading flag from `file:///` via AJAX. Actually this bug has been reported for a while, including the symlink variant, as well as a directory traversal in the GCDWebServer.
 
-![](/img/XHQ-73R0VHZvwNubvKipXg.png)
+![](/img/2018-08-07-something-about-realworldctf-doc2own/XHQ-73R0VHZvwNubvKipXg.png)
 
 #### Demo
 

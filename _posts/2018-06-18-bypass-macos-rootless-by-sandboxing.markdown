@@ -2,7 +2,7 @@
 layout:	post
 title:	"Bypass macOS Rootless by Sandboxing"
 date:	2018-06-18
-image: /img/elevated.png
+image: /img/2018-06-18-bypass-macos-rootless-by-sandboxing/elevated.png
 show_excerpt: true
 ---
 
@@ -17,11 +17,11 @@ CoreSymbolication(`/System/Library/PrivateFrameworks/CoreSymbolication.framework
 
 <!-- more -->
 
-![](/img/AcYsN5lN3MwURaTyzmZYlg.png)
+![](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/AcYsN5lN3MwURaTyzmZYlg.png)
 
 The function `xcselect_get_developer_dir_path` will return environ variable `DEVELOPER_DIR` if it's set. Absolutely controllable.
 
-![](/img/5y2YMlFx8NPfDGRv3PXszg.png)
+![](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/5y2YMlFx8NPfDGRv3PXszg.png)
 
 Actually the first `libswiftDemangle.dylib` candidate does exist. Will it reach the vulnerable branch? I'll talk about it later.
 
@@ -134,7 +134,7 @@ Now inject into `diskmanagementd` and you'll have the `com.apple.rootless.instal
 
 The bug has been fixed in Mojave Beta, no more external library, finally.
 
-![](/img/vAP5r0UBzDCQcnPl8WjDqA.png)
+![](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/vAP5r0UBzDCQcnPl8WjDqA.png)
 
 #### Update 2019-05-14
 

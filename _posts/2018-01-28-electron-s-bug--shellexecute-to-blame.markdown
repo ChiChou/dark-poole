@@ -2,6 +2,7 @@
 layout:	post
 title:	"Electron's Bug, ShellExecute to Blame?"
 date:	2018-01-28
+image: /img/2018-01-28-electron-s-bug-shellexecute/headline.png
 show_excerpt: true
 ---
 
@@ -56,7 +57,7 @@ So here's the root cause for CVE-2018-1000006. The exploit breaks command line w
 
 Let's see how Chromium itself mitigate the issue: add a double dash switch before user supplied arguments, treat all switch after it as invalid.
 
-![](/img/iU2sCqmFJDqskkI2RmWWpA.png)The bug can be triggered from browser remotely. Both Internet Explorer 11 and Chromium open external URI by invoking ShellExecute api:
+![](/img/2018-01-28-electron-s-bug-shellexecute/iU2sCqmFJDqskkI2RmWWpA.png)The bug can be triggered from browser remotely. Both Internet Explorer 11 and Chromium open external URI by invoking ShellExecute api:
 
 ```
 InternetExplorer 11
@@ -201,7 +202,7 @@ But wait! Neither `ShellExecute` nor `CreateProcess` supports pipe operator. The
 
 Around May 2012, a command execution bug was found and spread for fun. In the chat dialog of a famous IM, clicking on a domain name with malformed suffix will launch arbitrary local command in victim's system.
 
-![](/img/qq-traversal.png)
+![](/img/2018-01-28-electron-s-bug-shellexecute/qq-traversal.png)
 
 The reason is that QQ adds links to domains without http(s) prefix, then pass the malformed URI to ShellExecute api. ShellExecute recognizes the payload as a relative path, so the calculator pops up.
 
@@ -234,7 +235,7 @@ DESC=BBBBB TYPE=1 START=1
 
 In this URI protocol, the receiver application tried to parse a URL parameter and open it in the browser. The validation function checks substring instead of prefix, so the attacker use the keyword as part of the argument,then skip them with relative path.
 
-![](/img/v1wjCoUp-forHNtpIQBHXg.png)
+![](/img/2018-01-28-electron-s-bug-shellexecute/v1wjCoUp-forHNtpIQBHXg.png)
 
 So the application was fooled and it pass the calculator to ShellExecute. Boom!
 
@@ -285,6 +286,8 @@ int main(int argc, const char * argv[]) {
 Windows:
 
 <https://github.com/ChiChou/LookForSchemes/blob/master/AppSchemes.cpp>
+
+![Windows](/img/2018-01-28-electron-s-bug-shellexecute/windows.png)
 
 You can see many interesting protocols in the list. Will there be any new bug to be discovered?
 

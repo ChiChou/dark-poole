@@ -19,7 +19,7 @@ So I started looking at these services:
 
 <!-- more -->
 
-![](/img/diagext.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/diagext.png)
 
 Functionalities of these helpers are similar. Let's take a closer look at `timemachine.helper`. The interface is extremely simple:
 
@@ -44,7 +44,7 @@ Functionalities of these helpers are similar. Let's take a closer look at `timem
 
 It simply takes an `NSURL` as a destination directory to run the command `/usr/bin/tmdiagnose -r -w -f` on it, then copies the file that matches a regular expression to the destination parameter.
 
-![](/img/26VFI8kkb9ORKZL8r8BRGw.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/26VFI8kkb9ORKZL8r8BRGw.png)
 
 While it doesn't perform any check on the destination, you can put random garbage (the diagnostic logs) to any existing directory without rootless protection. The other helpers have the similar problem. Apple patched this flaw as CVE-2019-8530:
 
@@ -60,7 +60,7 @@ While it doesn't perform any check on the destination, you can put random garbag
 
 It used to be exploitable combined with a sudo design flaw.
 
-![](/img/pnry43E5sBN76OHsiGZotw.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/pnry43E5sBN76OHsiGZotw.png)
 
 > Sudo supports a feature where the user does not need to enter the password again for a few minutes after typing the password (and being successfully authenticated). The check was based on the modified time of the /var/db/sudo/{USER_NAME} directory. By setting the SubmitToLocalFolder value to be /var/db/sudo/{USER_NAME} and triggering the vulnerability, it is possible to execute sudo to gain root privileges.This bug can modify the timestamp of the directory by writing into it. Since sudo has been patched long ago, it's now pointless.
 
@@ -125,11 +125,11 @@ But the problem is, the `$NF` variable points to the last column, the IDENTIFIER
 
 Just don't give up now. I used to play web challenges in CTFs years ago so I remember there's a trick call [CRLF injection](https://www.owasp.org/index.php/CRLF_Injection). So let's add a line break to the volume name: `hello\nworld`. Now hello is the last column.
 
-![](/img/OJMCK5UKZ1gjBc1XKzNXCg.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/OJMCK5UKZ1gjBc1XKzNXCg.png)
 
 Volume label also supports special chars like \n\`$, so we can inject the payload here. But whitespaces will be treated as splitter and break the payload. Besides, the label is limited to be shorter than 23 chars (including the NULL terminator), otherwise it'll be truncated:
 
-![](/img/KndFoJPwQEFSlcNq5RpO3w.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/KndFoJPwQEFSlcNq5RpO3w.png)
 
 So the label must:
 
@@ -143,7 +143,7 @@ Since we have bash support now, wildcard comes to the rescue. The working dir is
 
 The final payload is disk`t*/1` to execute /tmp/1.
 
-![](/img/pMqZJGJO0hRC2y_MoOnjQg.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/pMqZJGJO0hRC2y_MoOnjQg.png)
 
 > Time Machine
 >
@@ -163,4 +163,4 @@ This bug can be exploited in the following steps:
 
 It takes about 2 min to trigger the root command because you have to wait for some time costing commands to finish. Anyways, it's freaking reliable.
 
-![](/img/Pcc6QzYLjwpcicaZ4utWFQ.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/Pcc6QzYLjwpcicaZ4utWFQ.png)

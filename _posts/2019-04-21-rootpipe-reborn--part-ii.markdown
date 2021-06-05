@@ -66,8 +66,8 @@ The privileged XPC service com.apple.appleseed.fbahelperd has exported the follo
 
 Look at the implementation of `-[FBAPrivilegedDaemon listener:shouldAcceptNewConnection:]` method. It only allows XPC messages from one client: `/System/Library/CoreServices/Applications/Feedback Assistant.app/Contents/MacOS/Feedback Assistant`
 
-![](/img/s3GRWFBhnSAnfvNA2D_d7A.png)
-![](/img/UAEP_VYOATMGYqgRr_A5gQ.png)
+![](/img/2019-04-21-rootpipe-reborn-part-ii/s3GRWFBhnSAnfvNA2D_d7A.png)
+![](/img/2019-04-21-rootpipe-reborn-part-ii/UAEP_VYOATMGYqgRr_A5gQ.png)
 
 But since it performs the security check based on process id, we can bypass it. You can now refer to the proof of concept by Ian Beer (<https://bugs.chromium.org/p/project-zero/issues/attachmentText?aid=276656>) or see my full exploit at the end.
 
@@ -81,7 +81,7 @@ The steps to trigger the race condition are as follows:
 
 From the console output, the server accepts our request:
 
-![](/img/upl0TAIffe77rXYMsCIJwg.png)
+![](/img/2019-04-21-rootpipe-reborn-part-ii/upl0TAIffe77rXYMsCIJwg.png)
 
 Now the check is passed
 
@@ -160,17 +160,17 @@ The daemon has other methods named `run*diagnoseWithDestination`. They are vario
 
 At first I was looking at runMDSDiagnoseWithDestination: , who launches /usr/bin/mddiagnose that will finally spawn /usr/local/bin/ddt after around 10 seconds, waiting for the /usr/bin/top command to end. Remember the previous post? This location does not exist by default and we can put custom executable with the arbitrary file copy bug.
 
-![](/img/t-r6124cbq4Ac4Q5CHnhNQ.png)
+![](/img/2019-04-21-rootpipe-reborn-part-ii/t-r6124cbq4Ac4Q5CHnhNQ.png)
 
 Another exploit path is method `runMobilityReportWithDestination:`. It invokes this shell script: `/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/Resources/get-mobility-info`
 
 The script checks the existence of `/usr/local/bin/netdiagnose`. If so, execute it as root. The exploit will success within milliseconds.
 
-![](/img/O2buvbSU9gtM0VkB5b67FA.png)
+![](/img/2019-04-21-rootpipe-reborn-part-ii/O2buvbSU9gtM0VkB5b67FA.png)
 
 By the way, I was surprised by how many diagnostic tools depending on the non-existing directory `/usr/local/bin`.
 
-![](/img/d8BjICtE2TB-xuZLe98sXQ.png)
+![](/img/2019-04-21-rootpipe-reborn-part-ii/d8BjICtE2TB-xuZLe98sXQ.png)
 
 The bug has been fixed in macOS 10.14.4 and iOS 12.2.
 

@@ -2,7 +2,7 @@
 layout:	post
 title:	"Two macOS Persistence Tricks Abusing Plugins"
 date:	2019-11-21
-image: /img/knockknock.png
+image: /img/2019-11-21-two-macos-persistence-tricks-abusing/knockknock.png
 show_excerpt: true
 ---
 
@@ -58,11 +58,11 @@ if (dict_has_entitlement(dict, "com.apple.security.cs.disable-library-validation
     }
 ```
 
-![](/img/M_Y-_vSkDAFS-dyQFlN0zA.png)
+![](/img/2019-11-21-two-macos-persistence-tricks-abusing/M_Y-_vSkDAFS-dyQFlN0zA.png)
 
 When an executable has any one of these entitlements, it implies that this process is designed to load third-party libraries. This leads me to these interesting persistence vectors on macOS.
 
-![](/img/xGZ8e3_kace4d9P2hdq39g.png)
+![](/img/2019-11-21-two-macos-persistence-tricks-abusing/xGZ8e3_kace4d9P2hdq39g.png)
 
 ## dspluginhelperd
 
@@ -72,7 +72,7 @@ In function `CPluginHandler::LoadPlugins`, it scans bundles that match `/Library
 
 ObjectiveSee's KnockKnock v2.1 has introduced detection for this persistence vector.
 
-![](/img/Lwtw5KOvKYnoxGOdZhR8iA.png)
+![](/img/2019-11-21-two-macos-persistence-tricks-abusing/Lwtw5KOvKYnoxGOdZhR8iA.png)
 
 ## MIDIServer
 
@@ -106,7 +106,7 @@ This agent does not set RunAtLoad to YES, and system built-in LaunchAgents is re
 
 It can not hide itself from persistence detection softwares like KnockKnock. But after all, this executable is valid signed by Apple.
 
-![](/img/knockknock.png)
+![](/img/2019-11-21-two-macos-persistence-tricks-abusing/knockknock.png)
 
 Since we've talked about the recent bug reports for MIDIServer:
 
@@ -117,7 +117,7 @@ Could this be a persistence vector on iOS? Unfortunately not.
 
 AMFI on iOS is slightly different. It does not care about `com.apple.security.cs.disable-library-validation` at all. On the other hand, Apple has introduced a new sandbox profile on iOS 13 to reduce its attack surface. But on macOS, sandbox profile named MIDIServer is nowhere to be found. Then it is like:
 
-![](/img/H1hZf4NNzOnlb_-JivJlrg.png)
+![](/img/2019-11-21-two-macos-persistence-tricks-abusing/H1hZf4NNzOnlb_-JivJlrg.png)
 
 So this executable has one entitlement that does not work on iOS, and another one useless on macOS 😢
 

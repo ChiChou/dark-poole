@@ -2,7 +2,7 @@
 layout:	post
 title:	"Bypass PHP Safe Mode by Abusing SQLite3's FTS Tokenizer"
 date:	2016-01-20
-image: /img/bad-tokenizer.png
+image: /img/2016-01-20-bypass-php-safe-mode-by/bad-tokenizer.png
 show_excerpt: true
 ---
 
@@ -66,7 +66,7 @@ static const sqlite3_tokenizer_module simpleTokenizerModule = {
 
 So a simple SQL query breaks the ASLR.
 
-![fts3_tokenizer_leak](/img/sqlite3-aslr.jpeg)
+![fts3_tokenizer_leak](/img/2016-01-20-bypass-php-safe-mode-by/sqlite3-aslr.jpeg)
 
 ## Arbitrary Code Execution via Callbacks
 
