@@ -3,13 +3,14 @@ layout:	post
 title:	"Rootpipe Reborn (Part II): CVE-2019-8565 Feedback Assistant Race Condition"
 date:	2019-04-21
 show_excerpt: true
+image: /img/2019-04-21-rootpipe-reborn-part-ii/race.jpg
 ---
-
-## Background
 
 There's a general bug type on macOS. When a privileged (or loosely sandboxed) user space process accepts an IPC message from an unprivileged or sandboxed client, it decides whether the operation is valid by enforcing code signature (bundle id, authority or [entitlements](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/AboutEntitlements.html)). If such security check is based on process id, it can be bypassed via pid reuse attack.
 
 <!-- more -->
+
+## Background
 
 An unprivileged client can send an IPC message, then spawns an entitled process to reuse current pid. The privileged service will then validate on the new process and accept the previous IPC request, leading to privilege escalation or even sandbox escape. The attacker can stably win the race by spawning multiple child processes to fill up the message queue.
 
