@@ -11,6 +11,15 @@
   li + li {
     margin-top: .25rem;
   }
+
+  &.full {
+    p {
+      overflow-wrap: break-word;
+    }
+    li {
+      word-break: break-word;
+    }
+  }
 }
 
 .posts {

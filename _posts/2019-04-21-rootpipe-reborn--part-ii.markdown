@@ -70,15 +70,21 @@ Look at the implementation of `-[FBAPrivilegedDaemon listener:shouldAcceptNewCon
 ![](/img/2019-04-21-rootpipe-reborn-part-ii/s3GRWFBhnSAnfvNA2D_d7A.png)
 ![](/img/2019-04-21-rootpipe-reborn-part-ii/UAEP_VYOATMGYqgRr_A5gQ.png)
 
-But since it performs the security check based on process id, we can bypass it. You can now refer to the proof of concept by Ian Beer (<https://bugs.chromium.org/p/project-zero/issues/attachmentText?aid=276656>) or see my full exploit at the end.
+But since it performs the security check based on process id, we can bypass it. You can now refer to the proof of concept by Ian Beer [entitlement_spoof.c](https://bugs.chromium.org/p/project-zero/issues/attachmentText?aid=276656) or see my full exploit at the end.
 
 The steps to trigger the race condition are as follows:
 
-1. Create multiple client processes via `posix_spawn` or `NSTask` (note: you can't do this on iOS)
-2. Better not to use fork because Objective-C runtime may crash if you call it between fork and exec, which is required by this attack. On 10.13 you can add a OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES environment variable before process creation or add a `__DATA,__objc_fork_ok` section to your executable as a workaround. But these workarounds are not compatible with previous macOS. For more information, please refer to <http://www.sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html>
-3. Send multiple XPC messages to the server to block the message queue
-4. Ian Beer uses `execve` to replace the binary to a trusted one and write to its its buffer to prevent the new process from terminating. Instead, I chose to pass these flags `POSIX_SPAWN_SETEXEC | POSIX_SPAWN_START_SUSPENDED` to `posix_spawn` to create a suspended child process and reuse the pid of the parent
-5. Since the child process has been replaced, there won't be any callback. You have to use a "canary" to detect whether the race is successful based on the server's behavior, e.g., the existence of a newly created file
+Create multiple client processes via `posix_spawn` or `NSTask` (note: you can't do this on iOS).
+
+Avoid using `fork` because Objective-C runtime may crash between `fork` and `exec`, which is required by this attack.
+
+On 10.13 you can add an `OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` environment variable before process creation or add a `__DATA,__objc_fork_ok` section to your executable as a workaround. But these workarounds are not compatible with previous macOS. For more information, please refer to [Objective-C and fork() in macOS 10.13](http://www.sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html).
+
+Send multiple XPC messages to the server to block the message queue.
+
+Ian Beer uses `execve` to replace the binary to a trusted one and write to its its buffer to prevent the new process from terminating. Instead, I chose to pass these flags `POSIX_SPAWN_SETEXEC | POSIX_SPAWN_START_SUSPENDED` to `posix_spawn` to create a suspended child process and reuse the pid of the parent.
+
+Since the child process has been replaced, there won't be any callback. You have to use a "canary" to detect whether the race is successful based on the server's behavior, e.g., the existence of a newly created file.
 
 From the console output, the server accepts our request:
 
