@@ -32,7 +32,7 @@ It's gonna be translated to the following abstract syntax tree. The execution is
 
 [![Abstract Syntax Tree](/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg)](/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg)
 
-NSExpression can be an operand of another NSPredicate instance, or used independently. In fact, the initializer of NSExpression simplys creates a new NSPredicate and returns one of the operand.
+NSExpression can be an operand of another `NSPredicate` instance, or used independently. In fact, the initializer of `NSExpression` simply creates a new `NSPredicate` and returns one of the operand.
 
 ```objc
 NSExpression *__cdecl +[NSExpression expressionWithFormat:argumentArray:](id a1, SEL a2, id a3, id a4)
@@ -50,9 +50,28 @@ NSExpression *__cdecl +[NSExpression expressionWithFormat:argumentArray:](id a1,
 }
 ```
 
-It supports compound mathematical expressions, so we can use NSExpression to create a calculator. All of those arithmetic operators are going to be translated to the methods of a private class `_NSPredicateUtilities`.
+It supports compound mathematical expressions, so we can use `NSExpression` to create a calculator. All of those arithmetic operators are going to be translated to invocations on a private class `_NSPredicateUtilities`.
 
 [Foundation.framework/_NSPredicateUtilities.h](https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/Foundation.framework/_NSPredicateUtilities.h)
+
+```objc
+@interface _NSPredicateUtilities : NSObject
++ (id)abs:(id)arg1;
++ (id)add:(id)arg1 to:(id)arg2;
++ (id)average:(id)arg1;
++ (id)bitwiseAnd:(id)arg1 with:(id)arg2;
++ (id)bitwiseOr:(id)arg1 with:(id)arg2;
++ (id)bitwiseXor:(id)arg1 with:(id)arg2;
++ (id)castObject:(id)arg1 toType:(id)arg2;
++ (id)ceiling:(id)arg1;
++ (id)count:(id)arg1;
++ (id)distanceToLocation:(id)arg1 fromLocation:(id)arg2;
++ (id)distinct:(id)arg1;
++ (id)divide:(id)arg1 by:(id)arg2;
++ (id)exp:(id)arg1;
+//...
+@end
+```
 
 Furthermore, we can extend the operators by dynamically adding methods to this class, just like what I did in the challenge:
 
@@ -74,7 +93,7 @@ It's clearly documented in the [official documentation of NSExpression](https://
 
 So this is a `[obj performSelector:NSSelectorFromString(str)]` equivalent.
 
-Generally we can use string and number literals in the expression, which will be translated to `NSString` and `NSNumber` respectively. There is a `CAST` operator that allows converting datatypes with lossy string representations, for example, `CAST(####, "NSDate")`. It doesn't mention that when the second parameter is `Class`, it equals `NSClassFromString`.
+Generally we can use string and number literals in the expression, which will be translated to `NSString` and `NSNumber` respectively. There is a `CAST` operator that allows converting datatypes with lossy string representations, for example, `CAST(####, "NSDate")`. It doesn't mention that when the second parameter is `Class`, this equals `NSClassFromString`.
 
 With arbitrary class lookup and arbitrary selector invocation, we now have full Objective-C runtime access.
 
@@ -120,9 +139,7 @@ class Clazz:
         return f'CAST("{self.name}","Class")'
 ```
 
-This is very close to the [SeLector-Oriented Programming by Project Zero](https://bugs.chromium.org/p/project-zero/issues/detail?id=1933).
-
-It's just like the `eval()` function of Objective-C. PAC doesn't stop this sort of execution at all.
+This is ~~very close to~~ even better than the [SeLector-Oriented Programming by Project Zero](https://bugs.chromium.org/p/project-zero/issues/detail?id=1933). It's just like the `eval()` function of Objective-C. PAC doesn't stop this sort of execution at all.
 
 If you prefer classic ROP, here is a method for PC-control, `-[NSInvocation invokeUsingIMP:]`. A problem for this method is that it won't do anything when the `target` property is `nil`. There is no way for both setting initializing the property and then reuse the reference to call its method, because predicates don't support lines and variables (at this moment).
 
@@ -183,7 +200,7 @@ You can defeat ASLR by leveraging `-[CNFileServices dlsym::]` or `-[ABFileServic
 
 ## Writing An Interpreter
 
-Both NSExpresson and NSPredicate acts as an interpreter that exposes runtime reflection interfaces to a dynamic string (scripting). There are several frameworks that have similar design, but for different purposes:
+Both `NSExpresson` and `NSPredicate` acts as an interpreter that exposes runtime reflection interfaces to a dynamic string (scripting). There are several frameworks that have similar design, but for different purposes:
 
 * [react-native](https://reactnative.dev/) for hybrid app development
 * [JSPatch](https://jspatch.com/) for hot patch
@@ -194,16 +211,16 @@ Dynamically loading remote script to execute native methods is considered voilat
 
 [Message from Apple Review... - Apple Developer Forums](https://developer.apple.com/forums/thread/73640)
 
-Compared to known dyanmic execution frameworks, `NSExpression` and `NSPredicate` are totally legitimate. You don't have to introduce suspecious symbols like `NSSelectorFromString`, the runtime does the job for you. The code pattern is hard to spot, because it looks like you're just filtering an array with a dynamic predicate. Innocent, isn't it?
+Compared to known dyanmic execution frameworks, `NSExpression` and `NSPredicate` are totally legitimate. You don't have to introduce suspecious symbols like `NSSelectorFromString`, the runtime does the job for you. The code pattern is hard to spot. It looks like you're just filtering an array with a dynamic predicate. Innocent, isn't it?
 
 Though we've got access to Objective-C runtime, there are some limitations for the expression that makes it hard to program the payload.
 
-* There is no line. It's only an expression, so an one-liner at a time
+* It's only an expression, so an one-liner at a time
 * No control flow. However, we can use compound logic operators to partially implement it
 * No local variables. There is a workaround.
 * Still powerful to do plenty of things.
 
-Because of those limitations, we can't initialize an object and call its different methods more than twice, unless the API is designed to be chaining calls. For example, it's impossible to call the following methods one by one.
+Because of those limitations, we can't initialize an object and call its different methods multiple times, unless the API is designed to be chaining calls. For example, it's impossible to call the following methods one by one.
 
 ```objc
 ClassA *a = [[ClassA alloc] init];
@@ -211,13 +228,13 @@ ClassA *a = [[ClassA alloc] init];
 [a submit];
 ```
 
-There is [Assignment Expression](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pBNF.html#//apple_ref/doc/uid/TP40001796-217886). The syntax looks like this:
+Fore local variables, there is [Assignment Expression](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pBNF.html#//apple_ref/doc/uid/TP40001796-217886). The syntax looks like this:
 
 ```
 assignment_expression ::= predicate_variable ":=" expression
 ```
 
-It's only avaliable when the `context` argument of the method `-[NSExpression expressionValueWithObject:context:]` is a valid `NSMutableDictionary`, then the evaluation result writes back a key-value pair back to this mutable dictionary. Just reuse the same context in a loop, then we can have a real script interpreter that supports variables.
+It's only avaliable when the `context` argument of the method `-[NSExpression expressionValueWithObject:context:]` is a valid `NSMutableDictionary`, then the evaluation result writes a key-value pair back to this mutable dictionary. Just reuse the same context in a loop, we can have a script interpreter that supports variables.
 
 ```objc
 #import <Foundation/Foundation.h>
@@ -400,6 +417,6 @@ libcoreroutine:__objc_const:00000001C4783800          -[RTPredicateValidator vis
 libcoreroutine:__objc_const:00000001C4796468          -[RTPredicateInspector visitPredicateExpression:]
 ```
 
-For example. `PHQuery` is associated to `PHFetchOptions` class when reading from photos. Without a proper validation, it could be an inter-process attack surface to bypass TCC. I've seen similar validations in a developer disk image daemon, a possible persistence vector that doesn't require rootfs remount (I need to remind you again, this execution technique works on PAC), the log command of macOS that is able to get task ports.
+For example. `PHQuery` is associated to `PHFetchOptions` class when reading from photos. Without a proper validation, it could be an inter-process attack surface to bypass TCC. I've seen similar validations in a developer disk image daemon, a possible persistence vector that doesn't require rootfs remount (I need to remind you again, this execution technique works on PAC), the `log` command of macOS that is able to get arbitrary task ports.
 
 So I guess it's hard to find real cases in Apple's own code because they handled it so carefully.
