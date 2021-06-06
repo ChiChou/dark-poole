@@ -75,6 +75,10 @@ slides:
     img: cross-site-escape.png
     url: https://speakerdeck.com/chichou/cross-site-escape-pwning-macos-safari-sandbox-the-unusual-way
 
+  - title: 'macOS “非主流”逻辑提权漏洞研究'
+    img: gossip-2019.jpg
+    url: https://speakerdeck.com/chichou/gossip-shu-qi-xue-xiao-2019-macos-fei-zhu-liu-luo-ji-ti-quan-lou-dong-yan-jiu
+
   - title: 'Bifröst 揭秘：VMware Fusion REST API 漏洞分析'
     img: vmware-fusion-rest-api.jpg
     url: https://speakerdeck.com/chichou/bifrost-jie-mi-vmware-fusion-rest-api-lou-dong-fen-xi
