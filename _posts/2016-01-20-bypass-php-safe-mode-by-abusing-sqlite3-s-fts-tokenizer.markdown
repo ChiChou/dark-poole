@@ -242,17 +242,17 @@ Here's the test environment.
 
 POC source code:
 
-https://github.com/chichou/badtokenizerpoc
+<https://github.com/chichou/badtokenizerpoc>
 
 Demo:
 
-https://asciinema.org/a/7tj88jfqb0xg6bdnjsu427fkx
+<https://asciinema.org/a/7tj88jfqb0xg6bdnjsu427fkx>
 
 ## References:
 
-[1]. [SQLite FTS3 and FTS4 Extensions](https://sqlite.org/fts3.html#section_8_1)
-[2]. [PHP: SQLite3 Installation](http://php.net/manual/en/sqlite3.installation.php)
-[3]. [How to Change Configuration Settings](http://php.net/manual/en/configuration.changes.php)
+1. [SQLite FTS3 and FTS4 Extensions](https://sqlite.org/fts3.html#section_8_1)
+2. [PHP: SQLite3 Installation](http://php.net/manual/en/sqlite3.installation.php)
+3. [How to Change Configuration Settings](http://php.net/manual/en/configuration.changes.php)
 
 中文版：[特性还是漏洞？滥用 SQLite 分词器](http://blog.chaitin.com/abusing_fts3_tokenizer/)
 
