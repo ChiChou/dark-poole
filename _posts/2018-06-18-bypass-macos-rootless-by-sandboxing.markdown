@@ -17,11 +17,34 @@ CoreSymbolication(`/System/Library/PrivateFrameworks/CoreSymbolication.framework
 
 <!-- more -->
 
-![](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/AcYsN5lN3MwURaTyzmZYlg.png)
+```c
+handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib", 1);​
+
+if (!handle && ((len = get_path_relative_to_framework_contents("../../Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/", "libswiftDemangle.dylib", alternative_path, 0x400), len == 0 || (handle = _dlopen(alternative_path, 1), handle == 0)))) && ((len2 = get_path_relative_to_framework_contents("../../usr/lib/libswiftDemangle.dylib", alternative_path, 0x400), len2 == 0 || (handle = _dlopen(alternative_path, 1), handle == 0)))) {​
+  handle_xcselect = _dlopen("/usr/lib/libxcselect.dylib", 1);​
+  if (handle_xcselect == 0)​
+    goto cleanup;​
+
+  p_get_dev_dir_path = (undefined *)_dlsym(handle_xcselect, "xcselect_get_developer_dir_path");​
+
+  if ((p_get_dev_dir_path == (undefined *)0x0) || (cVar2 = (*(code *)p_get_dev_dir_path)(alternative_path, 0x400, &local_42b, &local_42a, &local_429), cVar2 == 0)) {​
+    handle = 0;​
+  } else {​
+    _strlcat(alternative_path, "/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib", 0x400);​
+    handle = _dlopen(alternative_path, 1);​
+  }​
+
+  _dlclose(handle_xcselect);​
+
+  if (handle == 0)​
+    goto cleanup;​
+}​
+
+__ZL25demanglerLibraryFunctions.0 = _dlsym(handle, "swift_demangle_getSimplifiedDemangledName");​
+
+```
 
 The function `xcselect_get_developer_dir_path` will return environ variable `DEVELOPER_DIR` if it's set. Absolutely controllable.
-
-![](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/5y2YMlFx8NPfDGRv3PXszg.png)
 
 Actually the first `libswiftDemangle.dylib` candidate does exist. Will it reach the vulnerable branch? I'll talk about it later.
 
@@ -35,6 +58,9 @@ And they are entitled:
 
 ```shell
 ➜ ~ jtool --ent `which symbols`
+```
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "<http://www.apple.com/DTDs/PropertyList-1.0.dtd>">
 <plist version="1.0">
@@ -134,7 +160,24 @@ Now inject into `diskmanagementd` and you'll have the `com.apple.rootless.instal
 
 The bug has been fixed in Mojave Beta, no more external library, finally.
 
-![](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/vAP5r0UBzDCQcnPl8WjDqA.png)
+```objc
+void ____ZL22call_external_demanglePKc_block_invoke(void) {​
+  char *bDoNotDemangleSwift;​
+  void *handle;​ ​
+
+  bDoNotDemangleSwift = _getenv("CS_DO_NOT_DEMANGLE_SWIFT");​
+  if ((bDoNotDemangleSwift == NULL) ||​
+     (((byte)(*bDoNotDemangleSwift - 0x30U) < 0x3f &&​
+      ((0x4000000040000001U >> ((ulong)(byte)(*bDoNotDemangleSwift - 0x30U) & 0x1f) & 1) != 0)))) {​
+
+    handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib",1);​
+    if (handle != 0) {​
+      __ZL25demanglerLibraryFunctions.0 = _dlsym(handle,"swift_demangle_getSimplifiedDemangledName");​
+    }​
+  }​
+  return;​
+}​
+```
 
 #### Update 2019-05-14
 
@@ -142,6 +185,59 @@ This bug be exploited for kernel privilege escalation. Please refer to the slide
 
 <https://conference.hitb.org/hitbsecconf2019ams/materials/D2T2%20-%20ModJack%20-%20Hijacking%20the%20MacOS%20Kernel%20-%20Zhi%20Zhou.pdf>
 
-And here's the exploit to load an unsigned kernel extension on macOS 10.13:
+It's not XNU who validates code signature for kernel extensions, but those userspace executables that own the entitlement `com.apple.rootless.kext-secure-management` entitlement. These binaries are `kextd`, `kextutil` and `kextload` on 10.13.x. 
+
+Once you own the entitlement, you rule the kernel. The process can invoke `kext_request` to kindly ask XNU to load an extension:
+
+```c
+kern_return_t kext_request(
+  host_priv_t host_priv,
+  uint32_t user_log_flags,
+  vm_offset_t request_data,
+  mach_msg_type_number_t request_dataCnt,
+  vm_offset_t *response_data,
+  mach_msg_type_number_t *response_dataCnt,
+  vm_offset_t *log_data,
+  mach_msg_type_number_t *log_dataCnt,
+  kern_return_t *op_result);
+```
+
+Parameter `request_data` is an MKEXT message, serialized in XML format, while `response_data` is for reading the response back and `log_data` gives the logs.
+
+This is an example of MKEXT request:
+
+![MKEXT](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/mkext.svg)
+
+It consists of three parts:
+
+* header
+* file entry
+* plist
+
+![structure of the header](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/mkext2-structure.svg)
+
+The header defines basic information like packet length, checksum, version and CPU type. File entry has the full binary of the kernel extension. A single MKEXT request can have multiple file entries.
+
+```c
+typedef struct mkext2_file_entry {​
+  uint32_t  compressed_size;  // if zero, file is not compressed​
+  uint32_t  full_size;        // full size of data w/o this struct​
+  uint8_t   data[0];          // data is inline to this struct​
+} mkext2_file_entry;​
+```
+
+At the end of the packet is the plist metadata. It has the identifier, dependencies, path and part of the `Info.plist` of the kext bundle.
+
+Since it's the userspace that does the validation, my exploit simply patches the kill-switch of process `kextd` to allow arbitrary unsigned kext to be loaded.
+
+The service `kextd` checks the following conditions when we run `kextload`:
+
+* Signed: `OSKextIsAuthentic`
+* To avoid malicious modification during kext loading, it has a special staging process that the extension must be moved to a SIP-protected location. This process is ensured by function `rootless_check_trusted_class​`
+* Finally, `kextd` will ask user's approval by invoking this method `-[SPKernelExtensionPolicy canLoadKernelExtensionInCache:error]​`
+
+All of the functions have a same shortcut that, when `csr_check` (the syscall that checks the state of SIP) returns false, it will load arbitrary kext and ignore all the requirements. By reusing `kextool`, we don't have to manually serialize a valid `kext_request` on our own. 
+
+Here's the exploit to load an unsigned kernel extension on macOS 10.13:
 
 [**ChiChou/sploits**](https://github.com/ChiChou/sploits/tree/master/ModJack)
