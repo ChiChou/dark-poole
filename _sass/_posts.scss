@@ -216,8 +216,18 @@
     white-space: nowrap;
     
     a {
+      overflow: hidden;
       display: inline-block;
       margin: 2rem 2rem 0 0;
+      width: 320px;
+      height: 180px;
+
+      > img {
+        transition: .2s transform ease-in-out;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
     }
   }
 }
