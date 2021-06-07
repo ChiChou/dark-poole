@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('article.post.full img').forEach(img => {
-    if (img.clientWidth < 640) return
+    if (img.naturalWidth < 640) return
     const parent = img.parentElement
     if (parent.tagName === 'a') return
     const src = img.getAttribute('src')
