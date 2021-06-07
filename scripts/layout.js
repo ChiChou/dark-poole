@@ -1,17 +1,28 @@
+/**
+ * 
+ * @param {Image} img 
+ */
+function fit(img) {
+  if (img.naturalWidth < 640) return
+  const parent = img.parentElement
+  if (parent.tagName === 'a') return
+  const src = img.getAttribute('src')
+  const a = document.createElement('a')
+  a.setAttribute('href', src)
+  a.setAttribute('target', '_blank')
+  parent.insertBefore(a, img)
+  parent.removeChild(img)
+  a.appendChild(img)
+  a.style.display = 'block'
+  img.style.margin = 'auto'
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('article.post.full img').forEach(img => {
-    if (img.naturalWidth < 640) return
-    const parent = img.parentElement
-    if (parent.tagName === 'a') return
-    const src = img.getAttribute('src')
-    const a = document.createElement('a')
-    a.setAttribute('href', src)
-    a.setAttribute('target', '_blank')
-    parent.insertBefore(a, img)
-    parent.removeChild(img)
-    a.appendChild(img)
-    a.style.display = 'block'
-    img.style.margin = 'auto'
+    if (img.complete) 
+      fit(img)
+    else
+      img.addEventListener('load', e => fit(e), { once: true })
   })
 
   document.querySelectorAll('code').forEach(code => {
