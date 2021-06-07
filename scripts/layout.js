@@ -3,9 +3,9 @@
  * @param {Image} img 
  */
 function fit(img) {
-  if (img.naturalWidth < 640) return
+  if (img.naturalWidth < 200) return
   const parent = img.parentElement
-  if (parent.tagName === 'a') return
+  if (!parent || parent.tagName === 'a') return
   const src = img.getAttribute('src')
   const a = document.createElement('a')
   a.setAttribute('href', src)
@@ -14,10 +14,36 @@ function fit(img) {
   parent.removeChild(img)
   a.appendChild(img)
   a.style.display = 'block'
+  a.addEventListener('click', preview)
   img.style.margin = 'auto'
+  img.classList.add('click-to-zoom')
+}
+
+/**
+ * 
+ * @param {Event} event 
+ */
+function preview(event) {
+  event.preventDefault()
+  const img = event.target
+  const container = document.getElementById('preview')
+  const centered = document.querySelector('#preview img.preview')
+  container.classList.add('on')
+  container.querySelector('a.new-tab-btn').setAttribute('href', img.src)
+  centered.setAttribute('src', img.src)
+  centered.setAttribute('width', img.naturalWidth * devicePixelRatio)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  {
+    const container = document.getElementById('preview')
+    if (container) {
+      container.addEventListener('click', () =>
+        document.getElementById('preview').classList.remove('on'))
+      container.querySelector('.new-tab-btn').addEventListener(
+        'click', event => event.stopPropagation())
+    }
+  }
   document.querySelectorAll('article.post.full img').forEach(img => {
     if (img.complete) 
       fit(img)
