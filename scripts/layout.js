@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   document.querySelectorAll('article.post.full img').forEach(img => {
-    if (img.complete) 
+    if (img.complete)
       fit(img)
     else
-      img.addEventListener('load', e => fit(e), { once: true })
+      img.addEventListener('load', () => fit(img), { once: true })
   })
 
   document.querySelectorAll('code').forEach(code => {
