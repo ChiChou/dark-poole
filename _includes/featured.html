@@ -50,7 +50,7 @@
 <section class="container slides section">
   <h2>Presentations</h2>
   <div class="list">
-    {% for s in site.slides %}
+    {% for s in site.data.slides %}
     <a href="{{ s.url }}" target="_blank" rel="noopener" title="{{ s.title }}">
       <img alt="{{ s.title }}" src="/img/slides/{{ s.img }}" width="240">
     </a>
