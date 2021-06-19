@@ -1,20 +1,3 @@
-<section class="featured">
-  <div class="content container">
-    <h1>Hi, this is Zhi</h1>
-    <p>Amateur photographer. Security research on various platforms,
-      especially fruity operating systems.
-      Pwned several targets.</p>
-
-    <nav>
-      {% for page in site.data.links %}
-        <a class="sidebar-nav-item" target="_blank" href="{{ page[1] }}" rel="noopener" title="{{ page[0] }}">
-          <img src="/assets/{{ page[0] | downcase }}.svg" width="32" height="32" alt="{{ page[0] }}" class="link">
-        </a>
-      {% endfor %}
-    </nav>
-  </div>
-</section>
-
 <section class="content container projects section">
   <h2>Projects</h2>
   <div class="list">
