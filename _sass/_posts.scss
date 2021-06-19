@@ -127,67 +127,6 @@
   }
 }
 
-.featured {
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  align-items: center;
-
-  .content {
-    flex: 1;
-  }
-
-  background: #131313;
-  background-image: url('/assets/background-uhd.jpg');
-  @media (min-width: 30rem) and (max-width: 60rem) {
-    background-image: url('/assets/background-hd.jpg');
-  }
-  @media (max-width: 30rem) {
-    background-image: url('/assets/background-mobile.jpg');
-  }
-  background-size: cover;
-  background-position: bottom;
-
-  text-shadow: 1px 1px 2px #2d2d2d98;
-  text-align: left;
-  min-height: 50vh;
-
-  h1 {
-    animation: .2s ease-in-out 0s 1 fadein;
-    font-weight: 100;
-    font-size: 3rem;
-    @media (max-width: 30rem) {
-      font-size: 2rem;
-    }
-  }
-
-  p {
-    animation: .2s ease-out 0s 1 fadein;
-    max-width: 28em;
-    font-weight: 300;
-  }
-
-  nav {
-    margin-top: 5rem;
-  }
-
-  nav a {
-    text-decoration: none;
-    margin-right: 2rem;
-
-    img {
-      animation: .2s ease-in-out 0s 1 restore;
-      display: inline-block;
-      opacity: .7;
-      transition: all .2s ease-in-out;
-
-      &:hover {
-        opacity: 1;
-        transform: scale(1.2);
-      }
-    }
-  }
-}
-
 .section {
   margin-top: 6rem;
   margin-bottom: 8rem;

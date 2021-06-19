@@ -16,13 +16,13 @@
           <a href="{{ nav.url }}">{{ nav.title }}</a>
           {% endfor %}
         </nav>
+
+        {% if page.url == "/" %}
+          <h2>{{ site.tagline }}</h2>
+          <p>{{ site.description }}</p>
+        {% endif %}
       </div>
     </header>
-
- <!--    {% if page.url == "/" %}
-      {% include featured.html %}
-    {% endif %}
-  -->
   
     {{ content }}    
 
