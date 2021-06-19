@@ -5,9 +5,6 @@
 
 .page,
 .post {
-  margin-top: 2rem;
-  margin-bottom: 2em;
-
   li + li {
     margin-top: .25rem;
   }
@@ -18,6 +15,50 @@
     }
     li {
       word-break: break-word;
+    }
+
+    > header {
+      min-height: 640px;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+
+      > div {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+      }
+
+      > .content {
+        z-index: 1;
+        background-color: rgba(0, 0, 0, .4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > .stage {
+          width: 40rem;
+          max-width: 48rem;
+          padding: 1rem;
+        }
+
+        h1 {
+          color: #fff;
+          text-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.685);
+          font-size: 48px;
+        }
+
+        time {
+          color: rgba(255, 255, 255, 0.658);
+        }
+      }
+
+      > .background {
+        filter: blur(6px);
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+      }
     }
   }
 }
@@ -177,16 +218,32 @@
 $pink: #e91e63;
 
 article.post {
-  margin: 1rem;
-
   h1.post-title {
     font-weight: 300;
   }
 
   main {
-    > * {
-      width: 40rem;
-      margin: 1rem auto;
+    margin: 1rem;
+    margin-bottom: 120px;
+
+    @media (min-width: 800px) {
+      > * {
+        width: 40rem;
+        margin: 1rem auto;
+      }
+
+      > iframe {
+        width: 720px;
+        height: 480px;
+      }
+
+      > .highlighter-rouge {
+        width: 48rem;
+      }
+    }
+
+    .highlighter-rouge {
+      margin: 2rem auto;
     }
 
     > iframe {
@@ -232,11 +289,6 @@ article.post {
         border-radius: 0.25rem;
         padding: .125rem .25rem;
       }
-    }
-
-    > .highlighter-rouge {
-      width: 48rem;
-      margin: 2rem auto;
     }
   }
 
