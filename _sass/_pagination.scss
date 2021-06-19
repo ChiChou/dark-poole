@@ -50,36 +50,3 @@ a.pagination-item:hover {
     }
   }
 // }
-
-.posts {
-  margin: auto;
-  display: grid;
-  grid-row-gap: 40px;
-  justify-content: space-between;
-
-  @media (max-width: 720px) {
-    display: block;
-  }
-
-  @media (min-width: 720px) and (max-width: 1280px) {
-    margin: 20px 80px;
-    grid-template-columns: repeat(2, 50%);
-  }
-
-  @media (min-width: 1280px) and (max-width: 1440px) {
-    margin: 20px 80px;
-  }
-
-  @media (min-width: 1440px) {
-    margin: auto;
-    width: 1200px;
-  }
-
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(3, 33.3%);
-  }
-
-  .post {
-    margin: 20px;
-  }
-}

@@ -174,8 +174,8 @@
 }
 
 .section {
-  margin-top: 6rem;
-  margin-bottom: 8rem;
+  margin-top: 6rem !important;
+  margin-bottom: 6rem !important;
 }
 
 .projects {
@@ -213,6 +213,41 @@
         }
       }
     }
+  }
+}
+
+.front-container {
+  @media (max-width: 1440px) {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+
+  @media (min-width: 1440px) {
+    margin: auto;
+    width: 1200px;
+  }
+}
+
+.posts {
+  margin: auto;
+  display: grid;
+  grid-row-gap: 40px;
+  justify-content: space-between;
+
+  @media (max-width: 720px) {
+    display: block;
+  }
+
+  @media (min-width: 720px) and (max-width: 1280px) {
+    grid-template-columns: repeat(2, 50%);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(3, 33.3%);
+  }
+
+  .post {
+    margin: 20px;
   }
 }
 
