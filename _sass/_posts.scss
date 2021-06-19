@@ -36,6 +36,11 @@
         align-items: center;
         justify-content: center;
 
+        nav {
+          margin-bottom: 1rem;
+          color: var(--border-color);
+        }
+
         > .stage {
           width: 40rem;
           max-width: 48rem;
