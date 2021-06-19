@@ -6,7 +6,11 @@ image: /img/2016-01-20-bypass-php-safe-mode-by/bad-tokenizer.png
 show_excerpt: true
 ---
 
-As a pentester, once you own a webshell you may need to get more access by running extra programs. But `disable_functions` may stop you from invoking system commands and probably `open_basedir` was set as well. PHP doesn't actually have a sandbox, so these restrictions have no effect on native code. If there were a bug that leads to code execution, the access control policies are broken. For example, [this exploit](https://github.com/pwning/public-writeup/blob/master/hitcon2015/web500-use-after-flee/writeup.md) abuses an use after free bug to bypass them.
+As a pentester, once you own a webshell you may need to get more access by running extra programs. But `disable_functions` may stop you from invoking system commands and probably `open_basedir` was set as well.
+
+PHP doesn't actually have a sandbox, so these restrictions have no effect on native code. If there were a bug that leads to code execution, the access control policies are broken.
+
+For example, [this exploit](https://github.com/pwning/public-writeup/blob/master/hitcon2015/web500-use-after-flee/writeup.md) abuses an use after free bug to bypass them.
 
 <!-- more -->
 
