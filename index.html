@@ -5,10 +5,13 @@ description: Welcome to my blog
 image: /assets/home.png
 ---
 
-<h2>Posts</h2>
 <div class="posts">
   {% for post in paginator.posts %}
   <article class="post">
+    {% if post.image %}
+      <p><div class="thumbnail"><img src="{{ post.image }}" alt="{{ post.title }}"></div></p>
+    {% endif %}
+
     <h1 class="post-title">
       <a href="{{ post.url | relative_url }}">
         {{ post.title }}
@@ -18,10 +21,6 @@ image: /assets/home.png
     <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date"
       >{{ post.date | date_to_string }}</time
     >
-
-    {% if post.image %}
-      <p><div class="thumbnail"><img src="{{ post.image }}" alt="{{ post.title }}"></div></p>
-    {% endif %}
 
     {% if post.show_excerpt %}
       <div class="excerpt">
