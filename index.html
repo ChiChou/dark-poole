@@ -5,7 +5,13 @@ description: Welcome to my blog
 image: /assets/home.png
 ---
 
-<div class="posts">
+<header class="logo">
+  <h3>
+    <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
+  </h3>
+</header>
+
+<div class="posts front-container">
   {% for post in paginator.posts %}
   <article class="post">
     {% if post.image %}

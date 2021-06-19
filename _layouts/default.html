@@ -3,13 +3,9 @@
   {% include head.html %}
 
   <body>
-    {% if page.url == "/" %}
-      <header class="logo">
-        <h3>
-          <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
-        </h3>
-      </header>
+    {{ content }}
 
+    {% if page.url == "/" %}
       {% include featured.html %}
     {% endif %}
 
