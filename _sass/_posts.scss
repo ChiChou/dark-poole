@@ -22,18 +22,6 @@
   }
 }
 
-.posts {
-  display: grid;
-  grid-row-gap: 4rem;
-  grid-column-gap: 4rem;
-  justify-content: space-between;
-  grid-template-columns: repeat(2, 45%);
-  
-  @media (max-width: 44rem) {
-    display: block;
-  }
-}
-
 // Blog post or page title
 .post-title {
   font-weight: 100;
@@ -42,7 +30,7 @@
 .page-title,
 .post-title {
   font-family: 'Roboto', sans-serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
   color: var(--heading-color);
 }
