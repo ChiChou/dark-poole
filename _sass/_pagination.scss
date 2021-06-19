@@ -62,12 +62,12 @@ a.pagination-item:hover {
   }
 
   @media (min-width: 720px) and (max-width: 1280px) {
-    margin: 80px;
+    margin: 20px 80px;
     grid-template-columns: repeat(2, 50%);
   }
 
   @media (min-width: 1280px) and (max-width: 1440px) {
-    margin: 80px;
+    margin: 20px 80px;
   }
 
   @media (min-width: 1440px) {

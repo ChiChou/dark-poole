@@ -25,34 +25,6 @@ header.master {
     justify-content: space-between;
   }
 
-  .logo {
-    h3 {
-      margin: 0;
-    }
-    
-    a {
-      font-weight: 100;
-      font-size: 1.5rem;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-family: 'Russo One', sans-serif;
-      transition: .2s ease-out opacity;
-      background-image:linear-gradient(
-                        to right,
-                        #70c25c 0%, #70c25c 30%,
-                        #ffc04a 30%, #ffc04a 42.5%,
-                        #fc903d 42.5%, #fc903d 55%,
-                        #e94752 55%, #e94752 67.5%,
-                        #a954a5 67.5%, #a954a5 80%,
-                        #00afe0 80%, #00afe0 100%);
-      opacity: .8;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-
   nav {
     display: block;
     a {
@@ -68,4 +40,33 @@ header.master {
 
 .about {
   margin-top: 2rem;
+}
+
+.logo {
+  h3 {
+    text-align: center;
+    margin: 80px;
+  }
+  
+  a {
+    font-weight: 100;
+    font-size: 1.5rem;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Russo One', sans-serif;
+    transition: .2s ease-out opacity;
+    background-image:linear-gradient(
+                      to right,
+                      #70c25c 0%, #70c25c 30%,
+                      #ffc04a 30%, #ffc04a 42.5%,
+                      #fc903d 42.5%, #fc903d 55%,
+                      #e94752 55%, #e94752 67.5%,
+                      #a954a5 67.5%, #a954a5 80%,
+                      #00afe0 80%, #00afe0 100%);
+    opacity: .8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }

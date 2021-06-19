@@ -5,11 +5,7 @@
   <body>
     <header class="master">
       <div class="content">
-        <div class="logo">
-          <h3>
-            <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
-          </h3>
-        </div>
+        
 
         <nav class="nav">
           {% for nav in site.nav %}
@@ -23,7 +19,15 @@
         {% endif %}
       </div>
     </header>
-  
+
+    {% if page.url == "/" %}
+      <div class="logo">
+        <h3>
+          <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
+        </h3>
+      </div>
+    {% endif %}
+
     {{ content }}    
 
     <footer class="footer container">
