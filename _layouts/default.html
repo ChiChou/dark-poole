@@ -3,29 +3,14 @@
   {% include head.html %}
 
   <body>
-    <header class="master">
-      <div class="content">
-        
-
-        <nav class="nav">
-          {% for nav in site.nav %}
-          <a href="{{ nav.url }}">{{ nav.title }}</a>
-          {% endfor %}
-        </nav>
-
-        {% if page.url == "/" %}
-          <h2>{{ site.tagline }}</h2>
-          <p>{{ site.description }}</p>
-        {% endif %}
-      </div>
-    </header>
-
     {% if page.url == "/" %}
-      <div class="logo">
+      <header class="logo">
         <h3>
           <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
         </h3>
-      </div>
+      </header>
+
+      {% include featured.html %}
     {% endif %}
 
     {{ content }}    
