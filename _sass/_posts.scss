@@ -223,8 +223,12 @@
   }
 
   @media (min-width: 1440px) {
-    margin: auto;
     width: 1200px;
+    margin: auto;
+  }
+
+  @media (min-width: 2000px) {
+    width: 1800px;
   }
 }
 
