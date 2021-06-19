@@ -245,6 +245,91 @@
   cursor: zoom-in;
 }
 
+$pink: #e91e63;
+
+article.post {
+  margin: 1rem;
+
+  h1.post-title {
+    font-weight: 300;
+  }
+
+  main {
+    > * {
+      width: 40rem;
+      margin: 1rem auto;
+    }
+
+    > iframe {
+      display: block;
+      width: 48rem;
+      margin-top: 2rem;
+    }
+
+    > h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 2rem auto 1rem auto;
+      font-weight: 300;
+    }
+
+    a {
+      color: #fff;
+    }
+
+    > ul {
+      margin-bottom: 1rem;
+
+      li {
+        margin: .25rem 0;
+      }
+    }
+
+    blockquote {
+      background: rgba(0, 0, 0, .2);
+    }
+
+    p > img {
+      max-width: 100%;
+      transform: scale(1.25);
+    }
+
+    p, ul, ol {
+      code {
+        color: $pink;
+        background: hsl(0deg, 0%, 0%);
+        border-radius: 0.25rem;
+        padding: .125rem .25rem;
+      }
+    }
+
+    > .highlighter-rouge {
+      width: 48rem;
+      margin: 2rem auto;
+    }
+  }
+
+  div.highlight {
+    padding: 1rem;
+    overflow: auto;
+    margin-bottom: 1rem;
+  }
+
+  pre.highlight,
+  code {
+    font-family: "Fira Code", monospace;
+    overflow-wrap: break-word;
+  }
+
+  pre.highlight {
+    margin: 0.5rem;
+    text-shadow: 1px 1px 2px #000;
+  }
+}
+
 .preview-stage {
   position: fixed;
   top: 0;
