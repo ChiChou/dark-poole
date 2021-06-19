@@ -43,7 +43,6 @@
 
         > .stage {
           width: 40rem;
-          max-width: 48rem;
           padding: 1rem;
         }
 
@@ -284,6 +283,18 @@ article.post {
       > .highlighter-rouge {
         width: 48rem;
       }
+    }
+
+    pre.highlight, .highlighter-rouge {
+      break-inside: avoid;
+    }
+
+    @media (min-width: 1600px) and (max-width: 2399px) {
+      column-count: 2;
+    }
+
+    @media (min-width: 2400px) {
+      column-count: 3;
     }
 
     .highlighter-rouge {
