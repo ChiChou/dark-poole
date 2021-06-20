@@ -15,9 +15,16 @@ footer {
   margin-bottom: var(--spacer-3);
   padding: var(--spacer-3) 0;
 
+  @media (max-width: 800px) {
+    text-align: center;
+  }
+
   > nav {
     font-size: 1rem;
-    float: right;
+
+    @media (min-width: 800px) {
+      float: right;
+    }
     
     > a {
       margin-left: 1em;
