@@ -22,6 +22,10 @@ a {
   color: var(--link-color);
   overflow-wrap: break-word;
 
+  &:visited {
+    color: var(--link-color);
+  }
+
   // `:focus` is linked to `:hover` for basic accessibility
   &:hover,
   &:focus {
