@@ -42,6 +42,9 @@
 
         > .stage {
           width: 40rem;
+          @media (min-width: 1201px) {
+            width: 48rem;
+          }
           padding: 1rem;
         }
 
@@ -274,10 +277,10 @@ article.post {
     margin: 1rem;
     margin-bottom: 120px;
 
-    @media (min-width: 800px) {
+    @media (min-width: 800px) and (max-width: 1200px) {
       > * {
         width: 40rem;
-        margin: 1rem auto;
+        margin: 2rem auto;
       }
 
       > iframe {
@@ -287,6 +290,22 @@ article.post {
 
       > .highlighter-rouge {
         width: 48rem;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      > * {
+        width: 48rem;
+        margin: 2rem auto;
+      }
+
+      > iframe {
+        width: 1200px;
+        height: 720px;
+      }
+
+      > .highlighter-rouge {
+        width: 56rem;
       }
     }
 
@@ -331,7 +350,6 @@ article.post {
 
     p > img {
       max-width: 100%;
-      transform: scale(1.25);
     }
 
     p, ul, ol {
