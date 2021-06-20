@@ -105,6 +105,4 @@ objc_autoreleasePoolPop(v30);
 
 It concats the SSID to a format string and pass it to `WFLog:message:` method. Destination is 3 so it was the second xref of `CFStringCreateWithFormatAndArguments` that triggered the denial of service.
 
-For the exploitability, here's a hint: `%@`. But the rest of the parameters don't seem like to be controllable. I don't think this case is exploitable.
-
-After all, to trigger this bug, you need to connect to that WiFi, where the SSID is visible to the victim. A phishing Wi-Fi portal page might as well be more effective.
+For the exploitability, it doesn't echo and the rest of the parameters don't seem like to be controllable. Thus I don't think this case is exploitable. After all, to trigger this bug, you need to connect to that WiFi, where the SSID is visible to the victim. A phishing Wi-Fi portal page might as well be more effective.
