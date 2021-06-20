@@ -29,6 +29,10 @@ footer {
     > a {
       margin-left: 1em;
     }
+
+    > a:first-of-type {
+      margin-left: 0;
+    }
   }
 }
 
