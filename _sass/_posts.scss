@@ -288,9 +288,13 @@ article.post {
         height: 480px;
       }
 
-      > .highlighter-rouge {
+      > .highlighter-rouge, .outstanding {
         width: 48rem;
       }
+    }
+
+    > p.full {
+      width: 100%;
     }
 
     @media (min-width: 1201px) {
@@ -304,7 +308,7 @@ article.post {
         height: 720px;
       }
 
-      > .highlighter-rouge {
+      > .highlighter-rouge, .outstanding {
         width: 56rem;
       }
     }

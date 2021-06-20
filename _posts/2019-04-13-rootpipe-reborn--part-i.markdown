@@ -18,7 +18,7 @@ This talk revealed some very interesting LPE bugs found in diagnostic tool of th
 
 So I started looking at these services:
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/diagext.png)
+<p class="outstanding"><img src="/img/2019-04-13-rootpipe-reborn-part-i/diagext.png"></p>
 
 Functionalities of these helpers are similar. Let's take a closer look at `timemachine.helper`. The interface is extremely simple:
 
@@ -43,7 +43,7 @@ Functionalities of these helpers are similar. Let's take a closer look at `timem
 
 It simply takes an `NSURL` as a destination directory to run the command `/usr/bin/tmdiagnose -r -w -f` on it, then copies the file that matches a regular expression to the destination parameter.
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/26VFI8kkb9ORKZL8r8BRGw.png)
+<p class="outstanding"><img src="/img/2019-04-13-rootpipe-reborn-part-i/26VFI8kkb9ORKZL8r8BRGw.png"></p>
 
 While it doesn't perform any check on the destination, you can put random garbage (the diagnostic logs) to any existing directory without rootless protection. The other helpers have the similar problem. Apple patched this flaw as CVE-2019-8530:
 

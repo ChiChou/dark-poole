@@ -30,7 +30,7 @@ Here is an example:
 
 It's gonna be translated to the following abstract syntax tree. The execution is directly on this tree, no byte code or just-in-time compilation involved.
 
-[![Abstract Syntax Tree](/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg)](/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg)
+<p class="full"><img src="/img/2021-01-16-see-no-eval-runtime/nspredicate-ast.svg" alt="Abstract Syntax Tree"></p>
 
 NSExpression can be an operand of another `NSPredicate` instance, or used independently. In fact, the initializer of `NSExpression` simply creates a new `NSPredicate` and returns one of the operand.
 
