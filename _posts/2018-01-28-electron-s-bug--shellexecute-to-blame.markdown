@@ -293,11 +293,10 @@ You can see many interesting protocols in the list. Will there be any new bug to
 
 ### References
 
-[1]. [Registering an Application to a URI Scheme](https://msdn.microsoft.com/en-us/library/aa767914%28v=vs.85%29.aspx)
-[2]. [About Dynamic Data Exchange](https://msdn.microsoft.com/en-us/library/windows/desktop/ms648774%28v=vs.85%29.aspx)
-[3]. [Microsoft Security Bulletin MS07-061 — Critical](https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2007/ms07-061)
-[4]. <https://www.trendmicro.com/vinfo/id/threat-encyclopedia/vulnerability/920/multiple-browser-uri-handlers-command-injection-vulnerabilities>
-[5]. [Microsoft Security Bulletin MS10-007 — Critical](https://technet.microsoft.com/library/security/ms10-007)
-[6]. [URI Use and Abuse](https://www.blackhat.com/presentations/bh-dc-08/McFeters-Rios-Carter/Presentation/bh-dc-08-mcfeters-rios-carter.pdf)
-[7]. [Attack Surface Extended by URL Schemes](https://conference.hitb.org/hitbsecconf2017ams/materials/D2T2%20-%20Yu%20Hong%20-%20Attack%20Surface%20Extended%20by%20URL%20Schemes.pdf)
-
+1. [Registering an Application to a URI Scheme](https://msdn.microsoft.com/en-us/library/aa767914%28v=vs.85%29.aspx)
+2. [About Dynamic Data Exchange](https://msdn.microsoft.com/en-us/library/windows/desktop/ms648774%28v=vs.85%29.aspx)
+3. [Microsoft Security Bulletin MS07-061 — Critical](https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2007/ms07-061)
+4. <https://www.trendmicro.com/vinfo/id/threat-encyclopedia/vulnerability/920/multiple-browser-uri-handlers-command-injection-vulnerabilities>
+5. [Microsoft Security Bulletin MS10-007 — Critical](https://technet.microsoft.com/library/security/ms10-007)
+6. [URI Use and Abuse](https://www.blackhat.com/presentations/bh-dc-08/McFeters-Rios-Carter/Presentation/bh-dc-08-mcfeters-rios-carter.pdf)
+7. [Attack Surface Extended by URL Schemes](https://conference.hitb.org/hitbsecconf2017ams/materials/D2T2%20-%20Yu%20Hong%20-%20Attack%20Surface%20Extended%20by%20URL%20Schemes.pdf)
