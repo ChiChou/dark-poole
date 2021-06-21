@@ -67,8 +67,9 @@ The privileged XPC service com.apple.appleseed.fbahelperd has exported the follo
 
 Look at the implementation of `-[FBAPrivilegedDaemon listener:shouldAcceptNewConnection:]` method. It only allows XPC messages from one client: `/System/Library/CoreServices/Applications/Feedback Assistant.app/Contents/MacOS/Feedback Assistant`
 
-![](/img/2019-04-21-rootpipe-reborn-part-ii/s3GRWFBhnSAnfvNA2D_d7A.png)
-![](/img/2019-04-21-rootpipe-reborn-part-ii/UAEP_VYOATMGYqgRr_A5gQ.png)
+<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/s3GRWFBhnSAnfvNA2D_d7A.png" alt=""></p>
+
+<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/UAEP_VYOATMGYqgRr_A5gQ.png"></p>
 
 But since it performs the security check based on process id, we can bypass it. You can now refer to the proof of concept by Ian Beer [entitlement_spoof.c](https://bugs.chromium.org/p/project-zero/issues/attachmentText?aid=276656) or see my full exploit at the end.
 
@@ -88,7 +89,7 @@ Since the child process has been replaced, there won't be any callback. You have
 
 From the console output, the server accepts our request:
 
-![](/img/2019-04-21-rootpipe-reborn-part-ii/upl0TAIffe77rXYMsCIJwg.png)
+<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/upl0TAIffe77rXYMsCIJwg.png"></p>
 
 Now the check is passed
 
@@ -173,11 +174,11 @@ Another exploit path is method `runMobilityReportWithDestination:`. It invokes t
 
 The script checks the existence of `/usr/local/bin/netdiagnose`. If so, execute it as root. The exploit will success within milliseconds.
 
-![](/img/2019-04-21-rootpipe-reborn-part-ii/O2buvbSU9gtM0VkB5b67FA.png)
+<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/O2buvbSU9gtM0VkB5b67FA.png"></p>
 
 By the way, I was surprised by how many diagnostic tools depending on the non-existing directory `/usr/local/bin`.
 
-![](/img/2019-04-21-rootpipe-reborn-part-ii/d8BjICtE2TB-xuZLe98sXQ.png)
+<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/d8BjICtE2TB-xuZLe98sXQ.png"></p>
 
 The bug has been fixed in macOS 10.14.4 and iOS 12.2.
 
