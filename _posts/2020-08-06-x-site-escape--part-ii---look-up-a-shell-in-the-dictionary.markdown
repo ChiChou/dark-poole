@@ -162,7 +162,7 @@ a.href = 'file:///Applications/Calculator.app';
 a.click()
 ```
 
-![](/img/2020-08-06-x-site-escape-part/calc.png)
+<p class="full"><img src="/img/2020-08-06-x-site-escape-part/calc.png"></p>
 
 Wait, how does this even happen?
 
@@ -250,7 +250,7 @@ Use `dict://ExploitStage2` to finally open Dictionary app and load the second st
 
 ## Full Sandbox Escape
 
-![](/img/2020-08-06-x-site-escape-part/dict-sbx-diagram.svg)
+<p class="full"><img src="/img/2020-08-06-x-site-escape-part/dict-sbx-diagram.svg"></p>
 
 Since the MobileAssets framework does not set com.apple.quarantine attribute, we can just put an executable `.app` bundle and execute it. I've tried `.terminal` and `.command` as well. It didn't work because Dictionary app has a `com.apple.security.app-sandbox` entitlement, with whom the Terminal app will decline to open the file.
 
