@@ -317,8 +317,20 @@ article.post {
       break-inside: avoid;
     }
 
-    .highlighter-rouge {
+    div.highlighter-rouge {
       margin: 2rem auto;
+      position: relative;
+
+      &:hover > button {
+        display: inline;
+      }
+
+      > button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: none;
+      }
     }
 
     > iframe {

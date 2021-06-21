@@ -5,7 +5,7 @@
 function fit(img) {
   if (img.naturalWidth < 200) return
   const parent = img.parentElement
-  if (!parent || parent.tagName === 'a') return
+  if (!parent || parent.tagName.toLowerCase() === 'a') return
   const src = img.getAttribute('src')
   const a = document.createElement('a')
   a.setAttribute('href', src)
@@ -56,6 +56,37 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(code)
       code.parentElement.style.overflowWrap = 'break-word'
     }
+  })
+
+  /**
+   * 
+   * @param {Event} event 
+   */
+  function copy(event) {
+    const button = event.target
+    const element = button.parentElement.querySelector('.highlight')
+    const selection = window.getSelection()
+    if (!selection) return
+    const range = document.createRange()
+    range.selectNodeContents(element)
+    selection.removeAllRanges()
+    selection.addRange(range)
+    document.execCommand('copy')
+    button.textContent = 'Copied'
+    button.disabled = true
+
+    element.addEventListener('mouseout', () => {
+      button.disabled = false
+      button.textContent = 'Copy'
+    }, { once: true })
+  }
+
+  document.querySelectorAll('div.highlighter-rouge').forEach(container => {
+    const b = document.createElement('button')
+    b.textContent = 'Copy'
+    // a.setAttribute('href', 'javascript:void(0)')
+    container.appendChild(b)
+    b.addEventListener('click', copy)
   })
 
   const main = document.querySelector('main')
