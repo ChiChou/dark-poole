@@ -83,7 +83,7 @@ create virtual table a using fts3(tokenize=mytokenizer);
 
 Use a debugger to view the context:
 
-```
+```c
 [---------------------code---------------------]
 RAX: 0x4141414141414141 (b'AAAAAAAA')
 RBX: 0x0
@@ -117,24 +117,24 @@ R15: 0x555555799f78 --> 0x7ffff7bb39e4 --> 0x746e65746e6f63 (b'content')
 `RAX` is the second parameter from `fts3_tokenizer`. SQLite3 called the `xCreate` callback with no validation and caused the segment fault. This refers to `sqlite3Fts3InitTokenizer` in `ext/fts3/fts3_tokenizer.c`.
 
 ```c
- m = (sqlite3_tokenizer_module *)sqlite3Fts3HashFind(pHash,z,(int)strlen(z)+1);
- if( !m ){
- sqlite3Fts3ErrMsg(pzErr, "unknown tokenizer: %s", z);
- rc = SQLITE_ERROR;
- }else{
- char const **aArg = 0;
+m = (sqlite3_tokenizer_module *)sqlite3Fts3HashFind(pHash,z,(int)strlen(z)+1);
+if( !m ){
+    sqlite3Fts3ErrMsg(pzErr, "unknown tokenizer: %s", z);
+    rc = SQLITE_ERROR;
+} else {
 
- //...lines omitted...
+char const **aArg = 0;
+//...lines omitted...
 
- rc = m->xCreate(iArg, aArg, ppTok);
- assert( rc!=SQLITE_OK || *ppTok );
- if( rc!=SQLITE_OK ){
- sqlite3Fts3ErrMsg(pzErr, "unknown tokenizer");
+rc = m->xCreate(iArg, aArg, ppTok);
+assert(rc != SQLITE_OK || *ppTok);
+if (rc != SQLITE_OK) {
+    sqlite3Fts3ErrMsg(pzErr, "unknown tokenizer");
 ```
 
 Assume the virtual table named *fulltext* has already been created successfully. This query triggers `xOpen` callback with the string "text goes here" as the `pInput1` parameter:
 
-```
+```sql
 insert into fulltext values("text goes here");
 ```
 
@@ -171,11 +171,11 @@ The SQLite3 extension is enabled by default as of PHP 5.3.0. It's possible to di
 
 PHP does not come with PIE, but apache2 does. PHP interpreter is loaded as a shared object (`mod_php.so`) in Apache2's worker processes, who have full protection enabled.
 
-> CANARY : ENABLED
-> FORTIFY : ENABLED
-> NX : ENABLED
-> PIE : ENABLED
-> RELRO : FULL
+     CANARY : ENABLED
+     FORTIFY : ENABLED
+     NX : ENABLED
+     PIE : ENABLED
+     RELRO : FULL
 
 Without a proper gadget for stack pivoting, sadly I only have one chance to call. *xOpen* looks good for PC-control. Its second param is a string from SQL which can be fully controlled.
 
