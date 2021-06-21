@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.execCommand('copy')
     button.textContent = 'Copied'
     button.disabled = true
+    selection.removeAllRanges()
 
     element.addEventListener('mouseout', () => {
       button.disabled = false
