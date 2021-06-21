@@ -182,14 +182,14 @@
 
 .projects {
   .list {
-    display: grid;
-    grid-row-gap: 1rem;
-    grid-column-gap: 4rem;
-    justify-content: space-between;
-    grid-template-columns: repeat(auto-fill, 360px);
- 
-    @media (max-width: 960px) {
-      display: block;
+    @for $i from 1 through 4 {
+      @media screen and (min-width: $i * 320px) { 
+        column-count: $i;
+      }
+    }
+
+    > article {
+      break-inside: avoid;
     }
   }
 
