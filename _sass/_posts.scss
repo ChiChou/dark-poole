@@ -13,6 +13,7 @@
     p {
       overflow-wrap: break-word;
     }
+
     li {
       word-break: break-word;
     }
@@ -387,7 +388,7 @@ article.post {
   pre.highlight,
   code {
     font-family: "Fira Code", monospace;
-    overflow-wrap: break-word;
+    overflow-wrap: normal;
   }
 
   pre.highlight {
