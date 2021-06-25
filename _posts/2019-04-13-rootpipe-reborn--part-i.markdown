@@ -18,7 +18,7 @@ This talk revealed some very interesting LPE bugs found in diagnostic tool of th
 
 So I started looking at these services:
 
-<p class="outstanding"><img src="/img/2019-04-13-rootpipe-reborn-part-i/diagext.png"></p>
+<p class="outstanding"><img src="/img/2019-04-13-rootpipe-reborn-part-i/diagext.svg"></p>
 
 Functionalities of these helpers are similar. Let's take a closer look at `timemachine.helper`. The interface is extremely simple:
 
@@ -210,4 +210,4 @@ This bug can be exploited in the following steps:
 
 It takes about 2 min to trigger the root command because you have to wait for some time costing commands to finish. Anyways, it's freaking reliable.
 
-<p class="full"><img src="/img/2019-04-13-rootpipe-reborn-part-i/Pcc6QzYLjwpcicaZ4utWFQ.png" alt="poc"></p>
+<p class="full"><img src="/img/2019-04-13-rootpipe-reborn-part-i/poc.svg" alt="poc"></p>
