@@ -18,27 +18,27 @@ CoreSymbolication(`/System/Library/PrivateFrameworks/CoreSymbolication.framework
 <!-- more -->
 
 ```c
-handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib", 1);​
+handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib", 1);
 
-if (!handle && ((len = get_path_relative_to_framework_contents("../../Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/", "libswiftDemangle.dylib", alternative_path, 0x400), len == 0 || (handle = _dlopen(alternative_path, 1), handle == 0)))) && ((len2 = get_path_relative_to_framework_contents("../../usr/lib/libswiftDemangle.dylib", alternative_path, 0x400), len2 == 0 || (handle = _dlopen(alternative_path, 1), handle == 0)))) {​
-  handle_xcselect = _dlopen("/usr/lib/libxcselect.dylib", 1);​
-  if (handle_xcselect == 0)​
-    goto cleanup;​
+if (!handle && ((len = get_path_relative_to_framework_contents("../../Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/", "libswiftDemangle.dylib", alternative_path, 0x400), len == 0 || (handle = _dlopen(alternative_path, 1), handle == 0)))) && ((len2 = get_path_relative_to_framework_contents("../../usr/lib/libswiftDemangle.dylib", alternative_path, 0x400), len2 == 0 || (handle = _dlopen(alternative_path, 1), handle == 0)))) {
+  handle_xcselect = _dlopen("/usr/lib/libxcselect.dylib", 1);
+  if (handle_xcselect == 0)
+    goto cleanup;
 
-  p_get_dev_dir_path = (undefined *)_dlsym(handle_xcselect, "xcselect_get_developer_dir_path");​
+  p_get_dev_dir_path = (undefined *)_dlsym(handle_xcselect, "xcselect_get_developer_dir_path");
 
-  if ((p_get_dev_dir_path == (undefined *)0x0) || (cVar2 = (*(code *)p_get_dev_dir_path)(alternative_path, 0x400, &local_42b, &local_42a, &local_429), cVar2 == 0)) {​
-    handle = 0;​
-  } else {​
-    _strlcat(alternative_path, "/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib", 0x400);​
-    handle = _dlopen(alternative_path, 1);​
-  }​
+  if ((p_get_dev_dir_path == (undefined *)0x0) || (cVar2 = (*(code *)p_get_dev_dir_path)(alternative_path, 0x400, &local_42b, &local_42a, &local_429), cVar2 == 0)) {
+    handle = 0;
+  } else {
+    _strlcat(alternative_path, "/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib", 0x400);
+    handle = _dlopen(alternative_path, 1);
+  }
 
-  _dlclose(handle_xcselect);​
+  _dlclose(handle_xcselect);
 
-  if (handle == 0)​
-    goto cleanup;​
-}​
+  if (handle == 0)
+    goto cleanup;
+}
 
 __ZL25demanglerLibraryFunctions.0 = _dlsym(handle, "swift_demangle_getSimplifiedDemangledName");​
 
@@ -161,22 +161,22 @@ Now inject into `diskmanagementd` and you'll have the `com.apple.rootless.instal
 The bug has been fixed in Mojave Beta, no more external library, finally.
 
 ```objc
-void ____ZL22call_external_demanglePKc_block_invoke(void) {​
-  char *bDoNotDemangleSwift;​
-  void *handle;​ ​
+void ____ZL22call_external_demanglePKc_block_invoke(void) {
+  char *bDoNotDemangleSwift;
+  void *handle;
 
-  bDoNotDemangleSwift = _getenv("CS_DO_NOT_DEMANGLE_SWIFT");​
-  if ((bDoNotDemangleSwift == NULL) ||​
-     (((byte)(*bDoNotDemangleSwift - 0x30U) < 0x3f &&​
-      ((0x4000000040000001U >> ((ulong)(byte)(*bDoNotDemangleSwift - 0x30U) & 0x1f) & 1) != 0)))) {​
+  bDoNotDemangleSwift = _getenv("CS_DO_NOT_DEMANGLE_SWIFT");
+  if ((bDoNotDemangleSwift == NULL) ||
+     (((byte)(*bDoNotDemangleSwift - 0x30U) < 0x3f &&
+      ((0x4000000040000001U >> ((ulong)(byte)(*bDoNotDemangleSwift - 0x30U) & 0x1f) & 1) != 0)))) {
 
-    handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib",1);​
-    if (handle != 0) {​
-      __ZL25demanglerLibraryFunctions.0 = _dlsym(handle,"swift_demangle_getSimplifiedDemangledName");​
-    }​
-  }​
-  return;​
-}​
+    handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib",1);
+    if (handle != 0) {
+      __ZL25demanglerLibraryFunctions.0 = _dlsym(handle,"swift_demangle_getSimplifiedDemangledName");
+    }
+  }
+  return;
+}
 ```
 
 #### Update 2019-05-14
@@ -206,7 +206,7 @@ Parameter `request_data` is an MKEXT message, serialized in XML format, while `r
 
 This is an example of MKEXT request:
 
-![MKEXT](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/mkext.svg)
+<p class="full"><img src="/img/2018-06-18-bypass-macos-rootless-by-sandboxing/mkext.svg" alt="MKEXT"></p>
 
 It consists of three parts:
 
@@ -214,16 +214,16 @@ It consists of three parts:
 * file entry
 * plist
 
-![structure of the header](/img/2018-06-18-bypass-macos-rootless-by-sandboxing/mkext2-structure.svg)
+<p class="full"><img src="/img/2018-06-18-bypass-macos-rootless-by-sandboxing/mkext2-structure.svg" alt="mkext2 structure"></p>
 
 The header defines basic information like packet length, checksum, version and CPU type. File entry has the full binary of the kernel extension. A single MKEXT request can have multiple file entries.
 
 ```c
-typedef struct mkext2_file_entry {​
-  uint32_t  compressed_size;  // if zero, file is not compressed​
-  uint32_t  full_size;        // full size of data w/o this struct​
-  uint8_t   data[0];          // data is inline to this struct​
-} mkext2_file_entry;​
+typedef struct mkext2_file_entry {
+  uint32_t  compressed_size;  // if zero, file is not compressed
+  uint32_t  full_size;        // full size of data w/o this struct
+  uint8_t   data[0];          // data is inline to this struct
+} mkext2_file_entry;
 ```
 
 At the end of the packet is the plist metadata. It has the identifier, dependencies, path and part of the `Info.plist` of the kext bundle.
@@ -233,8 +233,8 @@ Since it's the userspace that does the validation, my exploit simply patches the
 The service `kextd` checks the following conditions when we run `kextload`:
 
 * Signed: `OSKextIsAuthentic`
-* To avoid malicious modification during kext loading, it has a special staging process that the extension must be moved to a SIP-protected location. This process is ensured by function `rootless_check_trusted_class​`
-* Finally, `kextd` will ask user's approval by invoking this method `-[SPKernelExtensionPolicy canLoadKernelExtensionInCache:error]​`
+* To avoid malicious modification during kext loading, it has a special staging process that the extension must be moved to a SIP-protected location. This process is ensured by function `rootless_check_trusted_class`
+* Finally, `kextd` will ask user's approval by invoking this method `-[SPKernelExtensionPolicy canLoadKernelExtensionInCache:error]`
 
 All of the functions have a same shortcut that, when `csr_check` (the syscall that checks the state of SIP) returns false, it will load arbitrary kext and ignore all the requirements. By reusing `kextool`, we don't have to manually serialize a valid `kext_request` on our own. 
 
