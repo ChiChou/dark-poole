@@ -16,8 +16,6 @@ There's two quirks in Win32 Api [ShellExecute](https://msdn.microsoft.com/en-us/
 * URI association command line can be broken by non-encoded spaces, quotes, and backslashes in the URI
 * It's possible to confuse an application that a local path is a valid url, which leads to command execution
 
-<!-- more -->
-
 Custom url protocol is a common feature in Windows and macOS. On Windows, these protocols are registered in registry: [Registering an Application to a URI Scheme](https://msdn.microsoft.com/en-us/library/aa767914%28v=vs.85%29.aspx) (MSDN).
 
 For example, to associate alert: protocol to alert.exe, create following registry keys:

@@ -11,8 +11,6 @@ PHP doesn't actually have a sandbox, so these restrictions have no effect on nat
 
 For example, [this exploit](https://github.com/pwning/public-writeup/blob/master/hitcon2015/web500-use-after-flee/writeup.md) abuses an use after free bug to bypass them.
 
-<!-- more -->
-
 ## Backgrounds
 
 SQLite3 has a function called `fts3_tokenizer` to register custom tokenizers for full-text search. The FTS3 and FTS4 extension modules allows users to create special tables with a built-in full-text index (hereafter "FTS tables"). The full-text index allows the user to efficiently query the database for all rows that contain one or more words (hereafter "tokens"), even if the table contains many large documents.[1]

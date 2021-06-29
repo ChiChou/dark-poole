@@ -14,8 +14,6 @@ CoreSymbolication(`/System/Library/PrivateFrameworks/CoreSymbolication.framework
 * `/usr/lib/libswiftDemangle.dylib`
 * `${xcselect_get_developer_dir_path()}/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib`
 
-<!-- more -->
-
 ```c
 handle = _dlopen("/System/Library/PrivateFrameworks/Swift/libswiftDemangle.dylib", 1);
 

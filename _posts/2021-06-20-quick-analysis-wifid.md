@@ -7,8 +7,6 @@ image: /img/2021-06-20-quick-analysis-wifid/wifi.png
 
 Days ago a [twitter post](https://twitter.com/vm_call/status/1405937492642123782) revealed a bug in iOS Wi-Fi service:
 
-<!-- more -->
-
 > After joining my personal WiFi with the SSID “%p%s%s%s%s%n”, my iPhone permanently disabled it’s WiFi functionality. Neither rebooting nor changing SSID fixes it :~) [pic.twitter.com/2eue90JFu3](https://pic.twitter.com/2eue90JFu3)
 >
 > — Carl Schou (@vm_call) June 18, 2021

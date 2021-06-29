@@ -11,8 +11,6 @@ Since Mojave (10.14), [Hardened Runtime](https://developer.apple.com/documentati
 
 Some entitlements can mark an executable as an exception.
 
-<!-- more -->
-
 `AMFI.kext!platformHardenFlags`:
 
 ```c

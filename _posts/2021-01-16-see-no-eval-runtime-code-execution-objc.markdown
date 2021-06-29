@@ -12,8 +12,6 @@ I designed the challenge [Dezhou Instrumentz](https://github.com/ChiChou/DezhouI
 
 The challenge is about abusing runtime feature of Objective-C to execute arbitrary unsigned code on iOS (even with PAC). This is surprising because dynamically parsing and executing code (eval) is usually seen in script interpreters, not for a compiled language like Objective-C. I didn't have too much time preparing that talk so I'm about to add more detail on the chapters it didn't cover.
 
-<!-- more -->
-
 ## NSPredicate and NSExpression
 
 They are both from the Foundation framework, well-documented as below.

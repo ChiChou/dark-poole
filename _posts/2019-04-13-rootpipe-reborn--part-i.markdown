@@ -7,8 +7,6 @@ image: /img/2019-04-13-rootpipe-reborn-part-i/head.png
 
 macOS Mojave 10.14.4 has patched two LPE flaws I reported. They are both userspace XPC logic bugs, simple and reliable to get root privilege escalation, just like the [Rootpipe](https://www.slideshare.net/Synack/stick-that-in-your-rootpipe-smoke-it). This writeup is for the command injection in TimeMachine diagnose extension, which affects 10.12.x-10.14.3.
 
-<!-- more -->
-
 <https://support.apple.com/en-us/HT209600>
 
 **Since this exploit is easy to understand and 100% reliable, please upgrade to 10.14.4 ASAP.**
