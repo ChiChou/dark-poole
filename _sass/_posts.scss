@@ -3,6 +3,10 @@
 // Each post is wrapped in `.post` and is used on default and post layouts. Each
 // page is wrapped in `.page` and is only used on the page layout.
 
+.err404 {
+  margin-top: 5rem;
+}
+
 .page,
 .post {
   li + li {
@@ -10,12 +14,12 @@
   }
 
   &.full {
-    p {
+    code.highlighter-rouge {
       overflow-wrap: break-word;
     }
 
-    li {
-      word-break: break-word;
+    ul, blockquote {
+      overflow-x: hidden;
     }
 
     > header {
