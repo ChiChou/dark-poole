@@ -58,6 +58,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --body-color: var(--gray-300);
     --body-bg: var(--gray-800);
 
