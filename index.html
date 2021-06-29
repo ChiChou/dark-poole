@@ -28,11 +28,9 @@ image: /assets/home.png
       >{{ post.date | date_to_string }}</time
     >
 
-    {% if post.show_excerpt %}
-      <div class="excerpt">
-        {{ post.excerpt }}
-      </div>
-    {% endif %}
+    <div class="excerpt">
+      {{ post.excerpt }}
+    </div>
     <a href="{{ post.url }}" class="post-more">Continue Reading</a>
   </article>
   {% endfor %}

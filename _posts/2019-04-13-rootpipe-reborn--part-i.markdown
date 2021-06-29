@@ -2,7 +2,6 @@
 layout:	post
 title:	"Rootpipe Reborn (Part I): TimeMachine Command Injection"
 date:	2019-04-13
-show_excerpt: true
 image: /img/2019-04-13-rootpipe-reborn-part-i/head.png
 ---
 

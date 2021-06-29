@@ -3,7 +3,6 @@ layout:	post
 title:	"Electron's Bug, ShellExecute to Blame?"
 date:	2018-01-28
 image: /img/2018-01-28-electron-s-bug-shellexecute/headline.png
-show_excerpt: true
 ---
 
 So you have probably heard of Electron's remote command injection vulnerability [CVE-2018-1000006](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000006) in custom protocol handler. It's not too hard to reproduce the bug since the proof of concept is easily found in [the patch](https://github.com/electron/electron/commit/c49cb29ddf3368daf279bd60c007f9c015bc834c#diff-6428a7ecb6a3a2831eae23aee7efeac5R647). Actually the exploit has already been made public: [Exploiting Electron RCE in Exodus wallet](https://medium.com/@Wflki/exploiting-electron-rce-in-exodus-wallet-d9e6db13c374).

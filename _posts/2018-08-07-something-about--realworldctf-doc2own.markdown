@@ -3,7 +3,6 @@ layout:	post
 title:	"Something About #realworldctf doc2own"
 date:	2018-08-07
 image: /img/2018-08-07-something-about-realworldctf-doc2own/rwctf.png
-show_excerpt: true
 ---
 
 The challenge is to get a shell when the victim opens a Dash docset. Both Dash and Adobe Brackets are up to date. Actually the intended solution **involves no zero day at all**. This writeup from Team 217 [Real World CTF 2018 — doc2own](https://blog.l4ys.tw/2018/07/realworld-ctf-2018-doc2own/) (in Traditional Chinese) is the expected solution.

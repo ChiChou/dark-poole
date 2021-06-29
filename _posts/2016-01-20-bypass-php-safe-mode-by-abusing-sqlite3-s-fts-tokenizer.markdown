@@ -3,7 +3,6 @@ layout:	post
 title:	"Bypass PHP Safe Mode by Abusing SQLite3's FTS Tokenizer"
 date:	2016-01-20
 image: /img/2016-01-20-bypass-php-safe-mode-by/bad-tokenizer.png
-show_excerpt: true
 ---
 
 As a pentester, once you own a webshell you may need to get more access by running extra programs. But `disable_functions` may stop you from invoking system commands and probably `open_basedir` was set as well.
