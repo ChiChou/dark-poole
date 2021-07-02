@@ -161,7 +161,7 @@ a.click()
 
 <p class="full"><img src="/img/2020-08-06-x-site-escape-part/calc.png"></p>
 
-Wait, how does this even happen?
+Wait, how could this even happen?
 
 This delegate method handles navigation for the WebView:
 
