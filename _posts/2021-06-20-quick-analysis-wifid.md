@@ -1,7 +1,7 @@
 ---
 layout:	post
 title:	"Quick Analysis for the SSID Format String Bug"
-date:	2021-06-20-quick-analysis-wifid
+date:	2021-06-20
 image: /img/2021-06-20-quick-analysis-wifid/wifi.png
 ---
 
