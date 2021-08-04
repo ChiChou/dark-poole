@@ -120,3 +120,9 @@ app.launchWithURL_options_suspended_('calc://1337', {}, false);
 ```
 
 ![Calculator Demo](/img/2021-08-04-mistuned-part-i/calc.gif)
+
+## Conclusion
+
+CVE-2021-1748 is just anther fresh example of my previous BlackHat Talk [Cross-site Escape](https://i.blackhat.com/eu-20/Thursday/eu-20-Zhou-Cross-Site-Escape-Pwning-MacOS-Safari-Sandbox-The-Unusual-Way.pdf). A client side XSS disarms the sandbox and exposes a bigger attack surface by exposing extra methods to JavaScript. It doesn't even need memory corruption at this point to launch Calculator app.
+
+In the upcoming posts, I'll introduce a secondary UAF bug (CVE-2021-1864) to gain various memory primitives, build arbitrary invocation, and finally bypass both PAC and APRR to load arbitrary shellcode in the context of iTunes Store app.
