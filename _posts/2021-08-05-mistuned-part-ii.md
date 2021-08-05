@@ -25,8 +25,10 @@ What could possibly go wrong?
 According to the [documentation](https://developer.apple.com/library/archive/documentation/AppleApplications/Conceptual/SafariJSProgTopics/ObjCFromJavaScript.html):
 
 > For security reasons, no methods or KVC keys are exposed to the JavaScript environment by default. Instead a class must implement these methods:
->     `+ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector;`
->     `+ (BOOL)isKeyExcludedFromWebScript:(const char *)name;`
+>
+>  * `+ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector;`
+>  * `+ (BOOL)isKeyExcludedFromWebScript:(const char *)name;`
+>
 > The default is to exclude all selectors and keys. Returning NO for some selectors and key names will expose those selectors or keys to JavaScript. This is described further in  [WebKit Plug-In Programming Topics](https://developer.apple.com/library/archive/documentation/InternetWeb/Conceptual/WebKit_PluginProgTopic/WebKitPluginTopics.html#//apple_ref/doc/uid/TP40001521) .
 
 By returning `NO` for every selector, all of the methods are visible to JavaScript.
@@ -98,7 +100,7 @@ This bug was introduced by iOS 6. It has been assigned to CVE-2021-1864.
 ## Reclaiming the Memory
 Now it’s time for classic UAF exploitation. Refill the memory with another differently shaped object to make a type confusion.
 
-All the subclasses of `SUScriptObject` have the `deallloc` method exported. There are plenty of \verb|-[SUScriptInterface make*]| methods that allocate new instance for various of `SUScriptObject`, making them the ideal subjects to create dangling pointers. Here we chose `makeXMLHTTPStoreRequest` because the size of the object returned is big enough for not easily having collision with other common allocations.
+All the subclasses of `SUScriptObject` have the `deallloc` method exported. There are plenty of `-[SUScriptInterface make*]` methods that allocate new instance for various of `SUScriptObject`, making them the ideal subjects to create dangling pointers. Here we chose `makeXMLHTTPStoreRequest` because the size of the object returned is big enough for not easily having collision with other common allocations.
 
 The problem is that variant size objects in JavaScriptCore have their own heap, making it impossible to reclaim the freed memory with ArrayBuffer or JavaScript string.
 
