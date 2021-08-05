@@ -81,7 +81,7 @@ This bug has been assigned to CVE-2021-1748.
 
 Before getting into the code execution, this client-side XSS is interesting because it allows reading sensitive information and arbitrary app execution.
 
-The `UIWebView` uses obsolete `WebScripting` API to export extra methods to Javascript. `WebScripting` translates Javascript invocations to Objective-C, with known data types automatically converted. There is an `iTunes` namespace in `globalThis` context, which is bunded to an `SUScriptInterface` instance. It has innterfaces as follows:
+The `UIWebView` uses obsolete `WebScripting` API to export extra methods to Javascript. `WebScripting` translates Javascript invocations to Objective-C, with known data types automatically converted. There is an `iTunes` namespace in `globalThis` context, which is bunded to an `SUScriptInterface` instance. It has interfaces as follows:
 
 **Fingerprinting**. `iTunes.systemVersion()` and `userAgent` can tell the OS version and the model of SoC, which are useful for adjusting the exploit.
 
