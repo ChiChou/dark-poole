@@ -22,6 +22,10 @@ bool +[SUScriptObject isSelectorExcludedFromWebScript:](id, SEL, SEL)
 
 What could possibly go wrong?
 
+I bet you remember the famous addJavaScriptInterface (CVE-2012-6636) bug on Android. The root cause is that before the patch, there was no sufficient access control on whether the method should be exported to JavaScript. By abusing Java Reflection, malicious scripts are able to execute arbitrary code remotely.
+
+WebScripting is similar to `addJavaScriptInterface`. Both of them are for exporting extra native interfaces to JavaScript. Unlike JavaScriptInterface, WebScripting has access control from the beginning.
+
 According to the [documentation](https://developer.apple.com/library/archive/documentation/AppleApplications/Conceptual/SafariJSProgTopics/ObjCFromJavaScript.html):
 
 > For security reasons, no methods or KVC keys are exposed to the JavaScript environment by default. Instead a class must implement these methods:
@@ -32,6 +36,8 @@ According to the [documentation](https://developer.apple.com/library/archive/doc
 > The default is to exclude all selectors and keys. Returning NO for some selectors and key names will expose those selectors or keys to JavaScript. This is described further in  [WebKit Plug-In Programming Topics](https://developer.apple.com/library/archive/documentation/InternetWeb/Conceptual/WebKit_PluginProgTopic/WebKitPluginTopics.html#//apple_ref/doc/uid/TP40001521) .
 
 By returning `NO` for every selector, all of the methods are visible to JavaScript.
+
+Having a Deja Vu? This is just like `addJavaScriptInterface` without the `@JavascriptInterface` annotation.
 
 ## Primitive `addrof`
 
@@ -98,13 +104,29 @@ This results in an access voilation within the runtime function `objc_opt_respon
 This bug was introduced by iOS 6. It has been assigned to CVE-2021-1864.
 
 ## Reclaiming the Memory
+
 Now it’s time for classic UAF exploitation. Refill the memory with another differently shaped object to make a type confusion.
 
 All the subclasses of `SUScriptObject` have the `deallloc` method exported. There are plenty of `-[SUScriptInterface make*]` methods that allocate new instance for various of `SUScriptObject`, making them the ideal subjects to create dangling pointers. Here we chose `makeXMLHTTPStoreRequest` because the size of the object returned is big enough for not easily having collision with other common allocations.
 
 The problem is that variant size objects in JavaScriptCore have their own heap, making it impossible to reclaim the freed memory with ArrayBuffer or JavaScript string.
 
-Luckily I found this method `addMultiPartData:withName:type:` in `SUScriptFacebookRequest` class. The first argument is a string to lately create an `NSURL`. When the URL scheme is `data:`, it calls `SUGetDataForDataURL` to decode the payload to create an `NSData` with fully controlled length and content. This makes an incredibly perfect `malloc` primitive in the desired heap and it's even binary-safe. Every single bytes, including the `isa` pointer are fully customizable.
+Luckily I found this method `addMultiPartData:withName:type:` in `SUScriptFacebookRequest` class. The first argument is a string to lately create an `NSURL`. When the URL scheme is `data:`, it calls `SUGetDataForDataURL` to decode the payload to create an `NSData` with fully controlled length and content. This makes an incredibly perfect `malloc` primitive in the desired heap and it's even binary-safe. Every single byte, including the `isa` pointer is fully controllable.
+
+```javascript
+// alloc an SUScriptXMLHTTPStoreRequest
+const w = iTunes.makeXMLHTTPStoreRequest();
+const req = iTunes.createFacebookRequest('http://', 'GET');
+// malloc_size(SUScriptXMLHTTPStoreRequest) == 192
+const uri = str2DataUri(makeStr(192));
+// avoid GC
+window.w = w; window.req = req;
+// get a dangling pointer
+w.dealloc();
+for (let i = 0; i < 32; i++)
+  req.addMultiPartData(uri, 'A', 'B');
+w // boom
+```
 
 ![fakeobj](/img/2021-08-05-mistuned-part-ii/fakeobj.jpg)
 
@@ -114,4 +136,4 @@ Now the challenge is, how do we exploit this on PAC devices? Stay tuned for the 
 
 This bug is so unique. It wouldn’t be possible to reached the code without the first XSS. It's considered unfuzzable. Although `dealloc` does make the app crash, the methods are not enumerable by JavaScript unless we know the exact names.
 
-The funny thing is that there is a clear security warning in the documentation about how developers should deal with the method, but the code still went wrong. It makes me think that even given the machine enough intelligence and power to explore program states, some mistakes are still hard for them and even us human to understand. That's why we need offensive research.
+The funny thing is that there is a clear security warning in the documentation about how developers should deal with the method, but the code still went wrong. It makes me think that even given the machine enough intelligence and power to explore program states, some mistakes are still hard for them and even us human to understand. That's why we need code review for offensive research.
