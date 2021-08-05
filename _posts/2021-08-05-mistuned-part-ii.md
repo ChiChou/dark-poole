@@ -108,7 +108,7 @@ Luckily I found this method `addMultiPartData:withName:type:` in `SUScriptFacebo
 
 ![fakeobj](/img/2021-08-05-mistuned-part-ii/fakeobj.jpg)
 
-Now the challenge is, how do we exploit this on PAC devices? Stay tuned for next posts.
+Now the challenge is, how do we exploit this on PAC devices? Stay tuned for the next posts.
 
 ## Conclusion
 
