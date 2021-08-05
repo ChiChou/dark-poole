@@ -112,6 +112,6 @@ Now the challenge is, how do we exploit this on PAC devices? Stay tuned for the 
 
 ## Conclusion
 
-This bug is so unique. It wouldn’t be possible to reached the code without the first XSS. It's consider unfuzzable. Although `dealloc` does make the app crash, the methods are not enumerable by JavaScript unless we know the exact names.
+This bug is so unique. It wouldn’t be possible to reached the code without the first XSS. It's considered unfuzzable. Although `dealloc` does make the app crash, the methods are not enumerable by JavaScript unless we know the exact names.
 
 The funny thing is that there is a clear security warning in the documentation about how developers should deal with the method, but the code still went wrong. It makes me think that even given the machine enough intelligence and power to explore program states, some mistakes are still hard for them and even us human to understand. That's why we need offensive research.
