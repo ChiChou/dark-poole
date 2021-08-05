@@ -14,7 +14,7 @@ This is powered by the obsolete [WebScripting](https://developer.apple.com/docum
 
 However, an insufficient access control leads to exploitable bugs. The bug introduced by iOS 6 only has two instructions altogether.
 
-```objective-c
+```
 bool +[SUScriptObject isSelectorExcludedFromWebScript:](id, SEL, SEL)
   MOV             W0, #0
   RET
