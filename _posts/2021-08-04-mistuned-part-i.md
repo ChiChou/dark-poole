@@ -43,7 +43,7 @@ However, after analyzing the following methods, I found another bypass introduce
 * `-[SUStoreController _handleAccountURL:]`
 * `-[SKUIURL initWithURL:]`
 
-This bug could affect a wide range of iOS versions. Part of the PoC is redacted to help protect users that stay below 14.3 due to hardware limitations or at their will.
+**This bug could affect a wide range of iOS versions. Part of the PoC is redacted to help protect users that stay below 14.3 due to hardware limitations or at their will.**
 
 Given certain combination of parameters, this `itms` URL will force the app to ignore the hostname but load a secondary URL provided by the query string instead: `itms://<redacted>&url=http://www.apple.com`. While the hostname still has to match the trust list, it allows plain text http communications and some domains in the list like `support.mac.com` don't have HSTS, making them vulnerable to interception. Furthermore, according to the disassembly, it trusts arbitrary data URI in addition to the allowed host names: `itms://<redacted>&url=data:text/plain,hello`. This is basically a reflected XSS since it can carry arbitrary inline HTML. 
 
