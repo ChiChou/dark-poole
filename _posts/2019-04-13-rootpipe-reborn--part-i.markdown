@@ -84,7 +84,7 @@ While it doesn't perform any check on the destination, you can put random garbag
 
 It used to be exploitable combined with a sudo design flaw.
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/cve-2016-1806.svg)
+<p class="full"><a href="https://www.zerodayinitiative.com/advisories/ZDI-16-346/" target="_blank"><img src="/img/2019-04-13-rootpipe-reborn-part-i/cve-2016-1806.svg" alt="zdi"></a></p>
 
 [(Pwn2Own) Apple OS X SubmitDiagInfo Arbitrary Directory Creation Privilege Escalation Vulnerability](https://www.zerodayinitiative.com/advisories/ZDI-16-346/)
 
