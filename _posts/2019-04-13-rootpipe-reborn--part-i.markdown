@@ -84,7 +84,9 @@ While it doesn't perform any check on the destination, you can put random garbag
 
 It used to be exploitable combined with a sudo design flaw.
 
-![](/img/2019-04-13-rootpipe-reborn-part-i/pnry43E5sBN76OHsiGZotw.png)
+![](/img/2019-04-13-rootpipe-reborn-part-i/cve-2016-1806.svg)
+
+[(Pwn2Own) Apple OS X SubmitDiagInfo Arbitrary Directory Creation Privilege Escalation Vulnerability](https://www.zerodayinitiative.com/advisories/ZDI-16-346/)
 
 > Sudo supports a feature where the user does not need to enter the password again for a few minutes after typing the password (and being successfully authenticated). The check was based on the modified time of the /var/db/sudo/{USER_NAME} directory. By setting the SubmitToLocalFolder value to be /var/db/sudo/{USER_NAME} and triggering the vulnerability, it is possible to execute sudo to gain root privileges.This bug can modify the timestamp of the directory by writing into it. Since sudo has been patched long ago, it's now pointless.
 
