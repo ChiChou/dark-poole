@@ -90,3 +90,17 @@ header.master {
     }
   }
 }
+
+nav.social {
+  a {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: .2s color ease-in;
+  }
+
+  img {
+    width: 24px;
+    margin: 10px auto;
+  }
+}

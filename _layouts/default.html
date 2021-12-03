@@ -16,9 +16,9 @@
           >{{ site.time | date: '%Y' }}</time
         >. All rights reserved.
       </small>
-      <nav>
+      <nav class="social">
         {% for item in site.data.links %}
-          <a href="{{ item[1] }}" target="_blank" rel="noopener">{{ item[0] }}</a>
+          <a href="{{ item[1] }}" target="_blank" rel="noopener"><img alt="{{ item[0] }}" src="/assets/{{ item[0] | downcase }}.svg">{{ item[0] }}</a>
         {% endfor %}
       </nav>
     </footer>
