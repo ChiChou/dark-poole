@@ -94,9 +94,14 @@ header.master {
 nav.social {
   a {
     display: inline-block;
+    opacity: .55;
     text-align: center;
     text-decoration: none;
-    transition: .2s color ease-in;
+    transition: .2s color ease-in, .2s opacity ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   img {
