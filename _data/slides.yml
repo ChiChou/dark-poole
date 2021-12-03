@@ -2,6 +2,10 @@
   img: many-birds-one-stone.png
   url: https://speakerdeck.com/chichou/many-birds-one-stone-exploiting-a-single-sqlite-vulnerability-across-multiple-software
 
+- title: "Hack Different: Pwning iOS 14 with Generation Z Bugz"
+  img: hack-different.jpg
+  url: https://i.blackhat.com/USA21/Wednesday-Handouts/us-21-Hack-Different-Pwning-IOS-14-With-Generation-Z-Bug.pdf
+
 - title: 'ModJack: Hijacking the macOS Kernel (HITB Ams 2019)'
   img: modjack-hijacking-macos-kernel.jpg
   url: https://speakerdeck.com/chichou/modjack-hijacking-the-macos-kernel-hitb-ams-2019
