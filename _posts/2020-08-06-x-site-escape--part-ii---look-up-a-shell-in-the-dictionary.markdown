@@ -14,7 +14,7 @@ This post is the last part of this silly series, but I think it's the only notew
 
 The demo below is chained with [LinusHenze/WebKit-RegEx-Exploit](https://github.com/LinusHenze/WebKit-RegEx-Exploit). The sandbox escape part worked for macOS up to 10.14.6
 
-<iframe width="720" height="480" src="https://www.youtube.com/embed/tcdiPVj6hO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/tcdiPVj6hO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Arbitrary Resource Replacement in OTA
 

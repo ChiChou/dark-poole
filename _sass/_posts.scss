@@ -124,6 +124,9 @@
   img {
     border-radius: 0;
     transition: transform .2s ease-in-out;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   &:hover > img {
@@ -291,9 +294,8 @@ article.post {
         margin: 2rem auto;
       }
 
-      > iframe {
-        width: 720px;
-        height: 480px;
+      > iframe[src^="https://www.youtube.com"] {
+        max-width: 720px;
       }
 
       > .highlighter-rouge, .outstanding {
@@ -311,9 +313,8 @@ article.post {
         margin: 2rem auto;
       }
 
-      > iframe {
-        width: 960px;
-        height: 540px;
+      > iframe[src^="https://www.youtube.com"] {
+        max-width: 960px;
       }
 
       > .highlighter-rouge, .outstanding {
@@ -344,6 +345,12 @@ article.post {
     > iframe {
       display: block;
       margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    > iframe[src^="https://www.youtube.com"] {
+      width: 100%;
+      aspect-ratio: 16 / 10;
     }
 
     > h1,

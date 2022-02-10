@@ -92,15 +92,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('main')
   if (!main) return
-
-  function resetVideos() {
-    const width = main.clientWidth
-    document.querySelectorAll('iframe[src^="https://www.youtube.com"]').forEach(video => {
-      video.setAttribute('width', width)
-      video.setAttribute('height', width * 9 / 16)
-    })
-  }
-
-  window.addEventListener('resize', resetVideos)
-  resetVideos()
 })
