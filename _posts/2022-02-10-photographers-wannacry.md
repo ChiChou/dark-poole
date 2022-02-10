@@ -19,7 +19,7 @@ Similarly, CheckPoint has publish their findings on exploiting another DSLR bran
 Honestly I didn't track the patch process since I submitted them. It's unclear to me if there were any patches. However there are several reasons that I think it's more like a meme than actual attacks.
 
 * The attack surface I used requires the camera to connect to a rogue WiFi network, which is not a typical scenario for camera users.
-* Another potential attack surface, image transfer, requires either physical access (USB) or in the built-in hotspot of the camera. Direct WiFi access uses a randomized password. And if you already have physical access, there is nothing you can't do. You might as well just throw it out of the window.
+* Another potential attack surface, image transfer, requires either physical access (USB) or in the built-in hotspot of the camera. Direct WiFi access uses a randomized password. Once you have physical access, there is nothing you can't do. You might as well just throw it out of the window.
 * Computing power on DSLR cameras are low. Maybe someof them are optimized for graphics, but cryptography is different. DSLR nowadays have decent high definition that results in huge file sizes. It's unacceptably slow to do encryption on-device.
 * The bugs I am about to write existed in the Android subsystem, which had been removed from new models of the same series after May 2017. No longer avaliable.
 
@@ -261,4 +261,4 @@ With root access, it's possible to mess with the filesystem and break firmware u
 
 This attact scenario requires manually connecting to a rogue hotspot (not the one for direct photo transfer), so it's not very likely to happen in real life. It's funny to do the parody and show a possible vector for ransomware. I still think the ransomware on camera is non-trivial due to the lack of computing power. Maybe you can prove me wrong. Sometimes I posted something that I think has no serious impact but turned out to be exploitable. Who knows.
 
-Those affected models were released like more than 5 years ago. The system no longer exists on recent models. However some other vedors keep releasing new cameras that has Android and even with LightRoom preinstalled. Could be your next research target if you like.
+Those affected models were released like more than 5 years ago. The system no longer exists on recent models. However some other vedors keep releasing new cameras that has Android and even with Lightroom preinstalled. Could be your next research target if you like.
