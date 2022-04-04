@@ -417,4 +417,8 @@ libcoreroutine:__objc_const:00000001C4796468          -[RTPredicateInspector vis
 
 For example. `PHQuery` is associated to `PHFetchOptions` class when reading from photos. Without a proper validation, it could be an inter-process attack surface to bypass TCC. I've seen similar validations in a developer disk image daemon, a possible persistence vector that doesn't require rootfs remount (I need to remind you again, this execution technique works on PAC), the `log` command of macOS that is able to get arbitrary task ports.
 
-So I guess it's hard to find real cases in Apple's own code because they handled it so carefully.
+~~So I guess it's hard to find real cases in Apple's own code because they handled it so carefully.~~
+
+Update on Apr 2022
+
+Seems like this post inspired some exploit technique in the wild: https://googleprojectzero.blogspot.com/2022/03/forcedentry-sandbox-escape.html
