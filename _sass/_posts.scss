@@ -191,7 +191,7 @@
 .projects {
   .list {
     @for $i from 1 through 4 {
-      @media screen and (min-width: $i * 320px) { 
+      @media screen and (min-width: ($i * 320px)) { 
         column-count: $i;
       }
     }
@@ -205,16 +205,18 @@
 
 .slides {
   .list {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    
+    @for $i from 1 through 4 {
+      @media screen and (min-width: ($i * 320px)) { 
+        column-count: $i;
+      }
+    }
+
     a {
       overflow: hidden;
       display: inline-block;
-      margin: 2rem 2rem 0 0;
       width: 240px;
       height: 135px;
+      margin-bottom: 1rem;
 
       > img {
         transition: .2s transform ease-in-out;
