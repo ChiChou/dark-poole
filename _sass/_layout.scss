@@ -22,7 +22,7 @@ footer {
   > nav {
     font-size: 1rem;
 
-    @media (min-width: 800px) {
+    @media (min-width: 801px) {
       float: right;
     }
     
@@ -69,9 +69,16 @@ header.page {
 }
 
 .hero {
-  background: var(--code-bg) url('assets/wfh.svg') no-repeat right center;
-  background-size: contain;
-  background-origin: content-box;
+  @media (min-width: 801px) {
+    background: var(--code-bg) url('assets/wfh.svg') no-repeat right center;
+    background-size: contain;
+    background-origin: content-box;
+  }
+
+  @media (max-width: 800px) {
+    background: var(--code-bg);
+  }
+
   text-align: left;
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -97,6 +104,19 @@ header.page {
 
   a.more {
     float: right;
+    display: block;
+    background-color: var(--gray-900);
+    color: var(--gray-600);
+    transition: .2s ease-in-out background-color, .2s ease-in-out color;
+
+    &:hover {
+      background-color: var(--gray-600);
+      color: var(--gray-300);
+    }
+
+    border-radius: 4px;
+    padding: 8px;
+    text-decoration: none;
     font-size: 1rem;
   }
 
