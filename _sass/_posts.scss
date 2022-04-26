@@ -82,7 +82,7 @@
 
 .page-title,
 .post-title {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--title-font);
   font-size: 2.5rem;
   margin-bottom: 2rem;
   color: var(--heading-color);
@@ -107,7 +107,7 @@
 }
 
 .excerpt {
-  font-family: 'Roboto', sans-serif;
+
 }
 
 // Meta data line below post title
@@ -403,7 +403,7 @@ article.post {
 
   pre.highlight,
   code {
-    font-family: "Fira Code", monospace;
+    font-family: var(--code-font);
     overflow-wrap: normal;
   }
 
