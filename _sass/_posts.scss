@@ -190,11 +190,13 @@
 
 .projects {
   .list {
-    @for $i from 1 through 4 {
-      @media screen and (min-width: ($i * 320px)) { 
+    @for $i from 2 through 4 {
+      @media screen and (min-width: ($i * 320px + 1px)) { 
         column-count: $i;
       }
     }
+
+    column-count: 2;
 
     > article {
       break-inside: avoid;
@@ -205,11 +207,14 @@
 
 .slides {
   .list {
-    @for $i from 1 through 4 {
-      @media screen and (min-width: ($i * 320px)) { 
+    @for $i from 2 through 4 {
+      @media screen and (min-width: ($i * 320px + 1px)) { 
         column-count: $i;
       }
     }
+
+
+    column-count: 2;
 
     a {
       overflow: hidden;
