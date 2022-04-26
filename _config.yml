@@ -1,5 +1,5 @@
 # Setup
-paginate_path: "/page:num/"
+paginate_path: "/posts/:num/"
 permalink: pretty
 
 title:            CodeColorist
