@@ -136,6 +136,23 @@
 }
 
 nav.social {
+  font-size: 1rem;
+
+  margin-top: var(--spacer-2);
+
+  @media (min-width: 801px) {
+    float: right;
+    margin-top: 0;
+  }
+
+  >a {
+    margin-left: 1em;
+  }
+
+  >a:first-of-type {
+    margin-left: 0;
+  }
+
   a {
     display: inline-block;
     opacity: .55;
@@ -191,6 +208,11 @@ nav.social {
       width: 240px;
       height: 135px;
       margin-bottom: 1rem;
+
+      @media (max-width: 600px) {
+        margin: 2rem auto;
+        display: block;
+      }
 
       > img {
         transition: .2s transform ease-in-out;
