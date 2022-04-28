@@ -128,6 +128,7 @@
 .projects .promote {
   margin-top: 2rem;
   text-align: center;
+  padding: 2rem;
 
   p {
     margin-top: 2rem;
@@ -162,7 +163,12 @@ nav.social {
       }
     }
 
-    column-count: 2;
+    @media (max-width: 600px) {
+      > article {
+        margin: 2rem auto;
+        max-width: 320px;
+      }
+    }
 
     > article {
       break-inside: avoid;
@@ -178,9 +184,6 @@ nav.social {
         column-count: $i;
       }
     }
-
-
-    column-count: 2;
 
     a {
       overflow: hidden;
