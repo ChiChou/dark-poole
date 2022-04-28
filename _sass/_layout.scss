@@ -6,7 +6,7 @@
   max-width: 48rem;
   padding-left: var(--spacer-2);
   padding-right: var(--spacer-2);
-  margin-left:  auto;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -19,18 +19,18 @@ footer {
     text-align: center;
   }
 
-  > nav {
+  >nav {
     font-size: 1rem;
 
     @media (min-width: 801px) {
       float: right;
     }
-    
-    > a {
+
+    >a {
       margin-left: 1em;
     }
 
-    > a:first-of-type {
+    >a:first-of-type {
       margin-left: 0;
     }
   }
@@ -48,6 +48,7 @@ header.master {
 
   nav {
     display: block;
+
     a {
       text-decoration: none;
       font-size: .875rem;
@@ -69,24 +70,35 @@ header.page {
 }
 
 .hero {
+  background: var(--code-bg) url('assets/wfh.svg') no-repeat;
+
   @media (min-width: 801px) {
-    background: var(--code-bg) url('assets/wfh.svg') no-repeat right center;
+    background-position: right center;
     background-size: contain;
     background-origin: content-box;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+
+    p {
+      margin-top: 8rem;
+    }
   }
 
   @media (max-width: 800px) {
-    background: var(--code-bg);
+    background-position: right bottom;
+    padding-top: 2rem;
+    padding-bottom: 12rem;
+
+    p {
+      margin-top: 2rem;
+    }
   }
 
   text-align: left;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
 
   p {
     font-size: 1.25rem;
     text-transform: uppercase;
-    margin-top: 8em;
     margin-bottom: 0;
   }
 
@@ -94,7 +106,7 @@ header.page {
     color: var(--gray-500);
     margin-top: 0.5rem;
     margin-bottom: 6rem;
-    
+
     text-shadow: var(--gray-900) 1px 1px 1px;
   }
 }
@@ -138,14 +150,14 @@ header.page {
       a {
         text-decoration: none;
         display: block;
-        
+
         img {
           aspect-ratio: 9 / 5;
           width: 100%;
           border-radius: 0.5rem;
         }
 
-        > span {
+        >span {
           font-size: 1.25rem;
           display: block;
         }
@@ -165,14 +177,13 @@ header.page {
     -webkit-text-fill-color: transparent;
     font-family: 'Raleway', sans-serif;
     transition: .2s ease-out opacity;
-    background-image:linear-gradient(
-                      to right,
-                      #70c25c 0%, #70c25c 30%,
-                      #ffc04a 30%, #ffc04a 42.5%,
-                      #fc903d 42.5%, #fc903d 55%,
-                      #e94752 55%, #e94752 67.5%,
-                      #a954a5 67.5%, #a954a5 80%,
-                      #00afe0 80%, #00afe0 100%);
+    background-image: linear-gradient(to right,
+        #70c25c 0%, #70c25c 30%,
+        #ffc04a 30%, #ffc04a 42.5%,
+        #fc903d 42.5%, #fc903d 55%,
+        #e94752 55%, #e94752 67.5%,
+        #a954a5 67.5%, #a954a5 80%,
+        #00afe0 80%, #00afe0 100%);
     opacity: .8;
 
     &:hover {
