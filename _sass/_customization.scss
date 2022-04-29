@@ -68,7 +68,7 @@
 }
 
 .latest-posts {
-  margin-top: 2rem;
+  margin-top: var(--spacer-3);
 
   a.more {
     float: right;
@@ -90,19 +90,38 @@
 
   ul.cards {
     padding: 1rem 0;
+    display: grid;
+    grid-gap: var(--spacer-3);
 
     @media (min-width: 801px) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 10px;
+      justify-content: space-between;
     }
 
+    @media (max-width: 800px) {
+      justify-content: center;
+
+      img {
+        max-width: 420px;
+      }
+
+      li {
+        margin: auto;
+      }
+    }
+
+    @media (min-width: 801px) and (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1201px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     li {
       padding: 0;
       display: block;
       list-style: none;
-      margin: 0 1rem 2rem 0;
+      margin: 0;
       text-align: center;
       overflow: hidden;
 
@@ -175,19 +194,23 @@ nav.social {
 .projects {
   .list {
     @for $i from 2 through 4 {
-      @media screen and (min-width: ($i * 320px + 1px)) { 
+      @media (min-width: ($i * 320px + 1px)) and (max-width: (($i + 1) * 320px)) {
         column-count: $i;
       }
     }
 
+    @media (min-width: 1201px) {
+      column-count: 4;
+    }
+
     @media (max-width: 600px) {
-      > article {
-        margin: 2rem auto;
+      >article {
+        margin: 2rem 0;
         max-width: 320px;
       }
     }
 
-    > article {
+    >article {
       break-inside: avoid;
     }
   }
@@ -196,29 +219,36 @@ nav.social {
 
 .slides {
   .list {
+    display: grid;
+
     @for $i from 2 through 4 {
-      @media screen and (min-width: ($i * 320px + 1px)) { 
-        column-count: $i;
+      @media (min-width: ($i * 320px + 1px)) and (max-width: (($i + 1) * 320px)) {
+        grid-template-columns: repeat($i, 1fr);
       }
     }
 
-    a {
-      overflow: hidden;
-      display: inline-block;
-      width: 240px;
-      height: 135px;
-      margin-bottom: 1rem;
+    @media (min-width: 1201px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
 
-      @media (max-width: 600px) {
-        margin: 2rem auto;
-        display: block;
+    a {
+      margin: var(--spacer-2) auto;
+      text-align: center;
+
+      transition: .2s transform ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
       }
 
-      > img {
-        transition: .2s transform ease-in-out;
-        &:hover {
-          transform: scale(1.1);
-        }
+      width: 240px;
+      @media (max-width: 640px) {
+        width: 100%;
+      }
+
+      >img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
       }
     }
   }
