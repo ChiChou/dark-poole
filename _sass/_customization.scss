@@ -139,6 +139,7 @@
           aspect-ratio: 9 / 5;
           width: 100%;
           border-radius: 0.5rem;
+          box-shadow: 0px 0px 8px 1px #00000059;
         }
 
         >span {
@@ -239,8 +240,7 @@ nav.social {
 
     a {
       margin: var(--spacer-2) auto;
-      text-align: center;
-
+      text-align: center;      
       transition: .2s transform ease-in-out;
 
       &:hover {
@@ -254,6 +254,7 @@ nav.social {
 
       >img {
         width: 100%;
+        box-shadow: 0px 0px 8px 1px #00000059;
         aspect-ratio: 16 / 9;
       }
     }
