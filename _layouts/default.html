@@ -45,5 +45,10 @@
     </script>
     {% endif %}
 
+    {% if site.google_ads %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_ads }}"
+     crossorigin="anonymous"></script>
+    {% endif %}
+
   </body>
 </html>

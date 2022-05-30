@@ -12,6 +12,9 @@ author:
 
 paginate:         6
 
+ga_analytics:     UA-55005072-1
+google_ads:       ca-pub-1108303515150537
+
 # Gems
 plugins:
   - jekyll-gist
