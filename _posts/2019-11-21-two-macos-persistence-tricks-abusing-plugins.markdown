@@ -2,7 +2,7 @@
 layout:	post
 title:	"Two macOS Persistence Tricks Abusing Plugins"
 date:	2019-11-21
-image: /img/2019-11-21-two-macos-persistence-tricks-abusing/knockknock.png
+image: /img/2019-11-21-two-macos-persistence-tricks-abusing/plugin.jpg
 ---
 
 This blog does not involve any vulnerability, but I hope the readers can find these tricks useful for red teaming and malware defense.
