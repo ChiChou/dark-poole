@@ -43,7 +43,7 @@ sass:
 # Specify the author for blog posts
 author:
   name: CodeColorist
-  url: https://twitter.com/codecolorist
+  url: https://infosec.exchange/@codecolorist
 
 # Custom vars
 version: 3.0.0
