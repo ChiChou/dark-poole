@@ -108,11 +108,11 @@ The `UIWebView` uses obsolete `WebScripting` API to export extra methods to Java
 
 **Disk space**. `iTunes.diskSpaceAvailable()` tells the available disk space of the phone.
 
-**Telephony**. `iTunes.telephony` is a namespace that gives the phone number, operator and provider of the victim. Imagine this, there is no need to ask the number for a person that attractives you in a party. Just AirDrop the bait and wait for response.
+**Telephony**. `iTunes.telephony` is a namespace that gives the phone number, operator and provider of the victim. Imagine this, there is no need to ask the number for a person that attracts you in a party. Just AirDrop the bait and wait for response.
 
 **Reading textual files (within the container)**. `SUScriptInterface` has a custom AJAX implementation that doesn't enforce same-origin policy. The only limit is that the hostname must match a certain trusted list (different from the former). The implementation is based on `NSURL` and it doesn't check for the scheme, so I can use file URLs to read a local path, where the hostname will be discarded: `file://r.mzstatic.com/etc/passwd`. Unfortunately the result is `NSString` backed so it doesn't support binary data. After all, this app has no direct access to the full disk because of the sandbox.
 
-**Arbitrary app enumeration and execution**. `iTunes.installedSoftwareApplications` is an array for all the installed apps. It supports launching app by identifier, so here is how I managed to launch calculator from web without touching any modern memory safety mitigations:
+**Arbitrary app enumeration and execution**. `iTunes.installedSoftwareApplications` is an array of all installed apps. It even supports launching app by identifier. Here is how I managed to launch calculator from web without touching any modern memory safety mitigations:
 
 ```js
 const app = iTunes.softwareApplicationWithBundleID_('com.apple.calculator')
