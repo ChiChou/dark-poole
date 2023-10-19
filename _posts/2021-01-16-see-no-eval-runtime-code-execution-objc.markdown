@@ -419,6 +419,12 @@ For example. `PHQuery` is associated to `PHFetchOptions` class when reading from
 
 ~~So I guess it's hard to find real cases in Apple's own code because they handled it so carefully.~~
 
-Update on Apr 2022
+Updated on Apr 2022
 
-Seems like this post inspired some exploit technique in the wild: https://googleprojectzero.blogspot.com/2022/03/forcedentry-sandbox-escape.html
+Seems like this post inspired some exploit technique in the wild: [FORCEDENTRY: Sandbox Escape](https://googleprojectzero.blogspot.com/2022/03/forcedentry-sandbox-escape.html)
+
+Updated on Oct 2023
+
+[An analysis of an in-the-wild iOS Safari WebContent to GPU Process exploit](https://googleprojectzero.blogspot.com/2023/10/an-analysis-of-an-in-the-wild-ios-safari-sandbox-escape.html)
+
+<img src="https://i.imgur.com/TxkzN48.jpeg" width="320" />
