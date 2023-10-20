@@ -322,6 +322,10 @@ article.post {
 
     p > img {
       max-width: 100%;
+
+      &.meme {
+        display: inline;
+      }
     }
 
     p, ul, ol {
