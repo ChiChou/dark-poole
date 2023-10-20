@@ -3,7 +3,7 @@
  * @param {Image} img 
  */
 function fit(img) {
-  if (img.naturalWidth < 200) return
+  if (img.naturalWidth <= 240) return
   const parent = img.parentElement
   if (!parent || parent.tagName.toLowerCase() === 'a') return
   const src = img.getAttribute('src')

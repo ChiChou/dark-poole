@@ -427,4 +427,4 @@ Updated on Oct 2023
 
 [An analysis of an in-the-wild iOS Safari WebContent to GPU Process exploit](https://googleprojectzero.blogspot.com/2023/10/an-analysis-of-an-in-the-wild-ios-safari-sandbox-escape.html)
 
-<img src="https://i.imgur.com/TxkzN48.jpeg" width="320" />
+<img src="https://i.imgur.com/TxkzN48.jpeg" width="240" />
