@@ -419,12 +419,22 @@ For example. `PHQuery` is associated to `PHFetchOptions` class when reading from
 
 ~~So I guess it's hard to find real cases in Apple's own code because they handled it so carefully.~~
 
-Updated on Apr 2022
+## Follow-ups
+
+#### Updated on Apr 2022
 
 Seems like this post inspired some exploit technique in the wild: [FORCEDENTRY: Sandbox Escape](https://googleprojectzero.blogspot.com/2022/03/forcedentry-sandbox-escape.html)
 
-Updated on Oct 2023
+#### Updated on Oct 2023
 
 [An analysis of an in-the-wild iOS Safari WebContent to GPU Process exploit](https://googleprojectzero.blogspot.com/2023/10/an-analysis-of-an-in-the-wild-ios-safari-sandbox-escape.html)
 
 <p style="text-align: center"><img src="https://i.imgur.com/TxkzN48.jpeg" width="240" class="meme" /></p>
+
+#### Updated on Jan 2024
+
+Another round. Part of Operation Triangulation's attack chain.
+
+![attack chain](/img/2021-01-16-see-no-eval-runtime/trng_final_mystery_en_01.png)
+
+[Operation Triangulation’ attack chain](https://securelist.com/operation-triangulation-the-last-hardware-mystery/111669/)
