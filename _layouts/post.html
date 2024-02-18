@@ -22,7 +22,8 @@ layout: default
 </article>
 
 <div class="container">
-{% if site.related_posts != empty %}
+{% assign len = site.related_posts | size %} 
+{% if site.related_posts != empty and len != 0 %}
 <aside class="related">
   <h3>Related posts</h3>
   <ul class="related-posts">
