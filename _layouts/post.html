@@ -10,9 +10,6 @@ layout: default
 
     <div class="content">
       <div class="stage">
-        <nav class="logo">
-          <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
-        </nav>
         <h1 class="post-title">{{ page.title }}</h1>
         <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">{{ page.date | date_to_string }}</time>
       </div>
@@ -56,3 +53,5 @@ layout: default
 </div>
 
 <script type="application/javascript" src="/scripts/layout.js"></script>
+
+{% include footer.html %}
