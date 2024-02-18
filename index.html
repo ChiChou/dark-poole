@@ -1,12 +1,60 @@
 ---
 layout: default
 title: Home
-description: Programmer, Amateur Photographer and Content Creator
+description: Portfolio of @codecolorist
 image: /assets/home.png
 ---
 
-{% include highlights.html %}
+<style type="text/css">
+  html,
+  body {
+    background: #222 no-repeat center center;
+    background-size: cover;
+    background-image: image-set(url('/assets/bg.avif') type("image/avif"),
+        url('/assets/bg.webp') type("image/webp"));
+    min-height: 100vh;
+  }
 
-{% include projects.html %}
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 
-{% include slides.html %}
+<main class="home">
+  <section>
+    <picture class="avatar">
+      <source srcset="/assets/portrait.webp" type="image/webp">
+      <source srcset="/assets/portrait.avif" type="image/avif">
+      <img src="/assets/portrait.jpg" alt="Portrait of @codecolorist">
+    </picture>
+
+    <p>
+      Hey, I'm <a href="https://infosec.exchange/@codecolorist" target="_blank">@codecolorist</a>,
+      a software engineerer and amateur photographer based in Europe.
+    </p>
+
+    <p>If you like my work, you can <a target="_blank" href="https://github.com/sponsors/chichou">sponsor me on
+        GitHub</a>.</p>
+  </section>
+
+  <nav>
+    <ul class="external">
+      <li>
+        <a target="_blank" href="https://infosec.exchange/@codecolorist" rel="me">
+          <img src="/assets/icon/mastodon.svg" alt="Mastodon">
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="https://github.com/chichou">
+          <img src="/assets/icon/github.svg" alt="GitHub">
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="https://unsplash.com/@0xcc">
+          <img src="/assets/icon/unsplash.svg" alt="Unsplash">
+        </a>
+      </li>
+    </ul>
+  </nav>
+</main>
