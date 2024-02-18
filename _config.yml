@@ -3,8 +3,8 @@ paginate_path: "/posts/:num/"
 permalink: pretty
 
 title:            CodeColorist
-tagline:          'Final Lullaby'
-description:      'Close your eyes and I put us to sleep'
+tagline:          ''
+description:      ''
 url:              https://codecolor.ist
 
 author:
