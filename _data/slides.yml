@@ -1,6 +1,6 @@
 - title: 'Many Birds, One Stone: Exploiting a Single SQLite Vulnerability Across Multiple Software (BlackHat USA 2017)'
   img: many-birds-one-stone.png
-  url: https://speakerdeck.com/chichou/many-birds-one-stone-exploiting-a-single-sqlite-vulnerability-across-multiple-software
+  url: https://www.blackhat.com/docs/us-17/wednesday/us-17-Feng-Many-Birds-One-Stone-Exploiting-A-Single-SQLite-Vulnerability-Across-Multiple-Software.pdf
 
 - title: "Hack Different: Pwning iOS 14 with Generation Z Bugz"
   img: hack-different.jpg
@@ -8,7 +8,7 @@
 
 - title: 'ModJack: Hijacking the macOS Kernel (HITB Ams 2019)'
   img: modjack-hijacking-macos-kernel.jpg
-  url: https://speakerdeck.com/chichou/modjack-hijacking-the-macos-kernel-hitb-ams-2019
+  url: https://conference.hitb.org/hitbsecconf2019ams/materials/D2T2%20-%20ModJack%20-%20Hijacking%20the%20MacOS%20Kernel%20-%20Zhi%20Zhou.pdf
 
 - title: 'I Want to Break Free: Unusuall Logic Safari Sandbox Escapes (TyphoonCon 2019)'
   img: typhooncon-2019.jpg
@@ -16,7 +16,7 @@
 
 - title: 'Cross-Site Escape: Pwning macOS Safari Sandbox the Unusual Way (BlackHat EU 2020)'
   img: cross-site-escape.png
-  url: https://speakerdeck.com/chichou/cross-site-escape-pwning-macos-safari-sandbox-the-unusual-way
+  url: https://i.blackhat.com/eu-20/Thursday/eu-20-Zhou-Cross-Site-Escape-Pwning-MacOS-Safari-Sandbox-The-Unusual-Way.pdf
 
 - title: 'macOS “非主流”逻辑提权漏洞研究'
   img: gossip-2019.jpg
