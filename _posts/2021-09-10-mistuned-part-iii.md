@@ -4,9 +4,7 @@ title: "Mistuned Part 3: PAC Bypass"
 image: /img/2021-08-04-mistuned-part-i/mistune.png
 ---
 
-This is the third part of the series on *Mistuned* bug.
-
-In the previous parts, we have trigger use-after-free on Objective-C objects, and successfully used refill the dangling pointer with fully-controlled data. Now take a look at some prior research articles for further exploitation.
+In the previous parts, we have trigger use-after-free on Objective-C objects, and successfully refilled the dangling pointer with fully-controlled data. Now take a look at some prior research articles for further exploitation.
 
 * [The Objective-C Runtime:  Understanding and Abusing](http://phrack.org/issues/66/4.html#article)
 * [Modern Objective-C Exploitation Techniques](http://phrack.org/issues/69/9.html#article)
