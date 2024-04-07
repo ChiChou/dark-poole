@@ -2,7 +2,7 @@
 layout:	post
 title:	"Something About #realworldctf doc2own"
 date:	2018-08-07
-image: /img/2018-08-07-something-about-realworldctf-doc2own/rwctf.png
+image: /img/2018-08-07-something-about-realworldctf-doc2own/rwctf.webp
 ---
 
 The challenge is to get a shell when the victim opens a Dash docset. Both Dash and Adobe Brackets are up to date. Actually the intended solution **involves no zero day at all**. This writeup from Team 217 [Real World CTF 2018 — doc2own](https://blog.l4ys.tw/2018/07/realworld-ctf-2018-doc2own/) (in Traditional Chinese) is the expected solution.
@@ -49,7 +49,7 @@ There was no special reason to choose Dash as this part. Dash is popular for dev
 
 You may think about directly reading flag from `file:///` via AJAX. Actually this bug has been reported for a while, including the symlink variant, as well as a directory traversal in the GCDWebServer.
 
-![](/img/2018-08-07-something-about-realworldctf-doc2own/XHQ-73R0VHZvwNubvKipXg.png)
+![](/img/2018-08-07-something-about-realworldctf-doc2own/mail.png)
 
 #### Demo
 
