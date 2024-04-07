@@ -8,7 +8,11 @@ layout: default
   <div class="list">
     {% for s in site.data.slides %}
     <a href="{{ s.url }}" target="_blank" rel="noopener" title="{{ s.title }}">
-      <img alt="{{ s.title }}" src="/img/slides/{{ s.img }}" width="240">
+      <picture>
+        <source type="image/webp" srcset="/img/slides/{{ s.img | replace: '.jpg', '.webp' }}">
+        <source type="image/avif" srcset="/img/slides/{{ s.img | replace: '.jpg', '.avif' }}">
+        <img alt="{{ s.title }}" src="/img/slides/{{ s.img }}" width="240">
+      </picture>
     </a>
     {% endfor %}
   </div>

@@ -1,31 +1,31 @@
 - title: 'Many Birds, One Stone: Exploiting a Single SQLite Vulnerability Across Multiple Software (BlackHat USA 2017)'
-  img: many-birds-one-stone.png
+  img: many-birds-one-stone-sqlite.jpg
   url: https://www.blackhat.com/docs/us-17/wednesday/us-17-Feng-Many-Birds-One-Stone-Exploiting-A-Single-SQLite-Vulnerability-Across-Multiple-Software.pdf
 
 - title: "Hack Different: Pwning iOS 14 with Generation Z Bugz"
-  img: hack-different.jpg
+  img: mistuned.jpg
   url: https://i.blackhat.com/USA21/Wednesday-Handouts/us-21-Hack-Different-Pwning-IOS-14-With-Generation-Z-Bug.pdf
 
 - title: 'ModJack: Hijacking the macOS Kernel (HITB Ams 2019)'
-  img: modjack-hijacking-macos-kernel.jpg
+  img: modjack.jpg
   url: https://conference.hitb.org/hitbsecconf2019ams/materials/D2T2%20-%20ModJack%20-%20Hijacking%20the%20MacOS%20Kernel%20-%20Zhi%20Zhou.pdf
 
 - title: 'I Want to Break Free: Unusuall Logic Safari Sandbox Escapes (TyphoonCon 2019)'
-  img: typhooncon-2019.jpg
+  img: typhoon-con-2019.jpg
   url: https://speakerdeck.com/chichou/i-want-to-break-free-unusual-logic-safari-sandbox-escape
 
 - title: 'Cross-Site Escape: Pwning macOS Safari Sandbox the Unusual Way (BlackHat EU 2020)'
-  img: cross-site-escape.png
+  img: cross-site-escape.jpg
   url: https://i.blackhat.com/eu-20/Thursday/eu-20-Zhou-Cross-Site-Escape-Pwning-MacOS-Safari-Sandbox-The-Unusual-Way.pdf
 
 - title: 'macOS “非主流”逻辑提权漏洞研究'
-  img: gossip-2019.jpg
+  img: gossip2019.jpg
   url: https://speakerdeck.com/chichou/gossip-shu-qi-xue-xiao-2019-macos-fei-zhu-liu-luo-ji-ti-quan-lou-dong-yan-jiu
 
 - title: 'Bifröst 揭秘：VMware Fusion REST API 漏洞分析'
-  img: vmware-fusion-rest-api.jpg
+  img: rwctf2019-vmware.jpg
   url: https://speakerdeck.com/chichou/bifrost-jie-mi-vmware-fusion-rest-api-lou-dong-fen-xi
 
 - title: 'See No Eval: Runtime Dynamic Code Execution in Objective-C (RWCTF 2021)'
-  img: see-no-eval.jpg
+  img: rwctf2021-see-no-eval.jpg
   url: https://speakerdeck.com/chichou/see-no-eval-runtime-dynamic-code-execution-in-objective-c
