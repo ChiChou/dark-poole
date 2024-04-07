@@ -64,9 +64,59 @@ The privileged XPC service com.apple.appleseed.fbahelperd has exported the follo
 
 Look at the implementation of `-[FBAPrivilegedDaemon listener:shouldAcceptNewConnection:]` method. It only allows XPC messages from one client: `/System/Library/CoreServices/Applications/Feedback Assistant.app/Contents/MacOS/Feedback Assistant`
 
-<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/s3GRWFBhnSAnfvNA2D_d7A.png" alt=""></p>
+```
+launchctl plist "./System/Library/CoreServices/Applications/Feedback Assistant.app/Contents/Library/LaunchServices/fbahelperd"
+{
+	"CFBundleIdentifier" = "com.apple.appleseed.fbahelperd";
+	"SMAuthorizedClients" = (
+		"(identifier com.apple.appleseed.FeedbackAssistant) and anchor apple";
+	);
+};
+```
 
-<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/UAEP_VYOATMGYqgRr_A5gQ.png"></p>
+```objectivec
+id -[FBAPrivilegedDaemon authorizedClientReq](FBAPrivilegedDaemon *self, SEL selector)
+{
+  id bundle = NSBundle.mainBundle;
+  id value = [bundle objectForInfoDictionaryKey:@"SMAuthorizedClients"];
+  if (value && value.count == 1) {
+    return value.lastObject;
+  }
+  return nil;
+}
+
+BOOL -[FBAPrivilegedDaemon listener:shouldAcceptNewConnection:](
+        FBAPrivilegedDaemon *self,
+        SEL a2,
+        id a3,
+        id a4)
+{
+  id pid = [NSNumber numberWithLong:connection.processIdentifier];
+  id attr = [NSDictionary dictionaryWithObjects:&pid forKeys:&kSecGuestAttributePid count:1];
+  if (SecCodeCopyGuestWithAttributes(0, attr, 0, &guest)) {
+    syslog_DARWIN_EXTSN(3, "FBAPrivilegedDaemon SecCodeCreateWithPID returns error 0x%x\n", attr);
+    return NO;
+  }
+
+  id reqstr = [self authorizedClientReq];
+  if (!reqstr) {
+    syslog_DARWIN_EXTSN(3, "FBAPrivilegedDaemon couldn't find an authorized client requirement\n");
+    return NO;
+  }
+
+  SecRequirementRef requirement;
+  if (SecRequirementCreateWithString(reqstr, 0, &requirement)) {
+    syslog_DARWIN_EXTSN(3, "FBAPrivilegedDaemon SecRequirementCreateWithString returns error 0x%x\n", attr);
+    return NO;
+  }
+
+  if (SecCodeCheckValidity(guest, 0, requirement)) {
+    syslog_DARWIN_EXTSN(2, "FBAPrivilegedDaemon SecCodeCheckValidity returns error %d (0x%x)\n", attr, attr);
+    return NO;
+  }
+  // ...
+}
+```
 
 But since it performs the security check based on process id, we can bypass it. You can now refer to the proof of concept by Ian Beer [entitlement_spoof.c](https://bugs.chromium.org/p/project-zero/issues/attachmentText?aid=276656) or see my full exploit at the end.
 
