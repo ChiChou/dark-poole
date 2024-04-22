@@ -1,8 +1,9 @@
 ---
 layout:	post
 title:	"Bypass macOS Rootless by Sandboxing"
-date:	2018-06-18
-image: /img/2018-06-18-bypass-macos-rootless-by-sandboxing/elevated.webp
+date:	  2018-06-18
+image:  /img/2018-06-18-bypass-macos-rootless-by-sandboxing/elevated.webp
+desc:   Attacking the operating system by using its own security mechanism.
 ---
 
 This bug has been fixed in Mojave Beta, but still present in latest High Sierra (10.13.5). It's a logic bug that an entitled binary tries to load an insecure external library controllable by environment variable. To exploit it we need to abuse sandbox, which is interesting that sometimes a mitigation could be turned to an exploit.

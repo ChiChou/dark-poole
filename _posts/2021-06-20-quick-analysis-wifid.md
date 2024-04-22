@@ -1,8 +1,9 @@
 ---
 layout:	post
 title:	"Quick Analysis for the SSID Format String Bug"
-date:	2021-06-20
-image: /img/2021-06-20-quick-analysis-wifid/wifi.png
+date:	  2021-06-20
+image:  /img/2021-06-20-quick-analysis-wifid/wifi.png
+desc:   A rogue Wi-Fi hotspot can crash your phone.
 ---
 
 Days ago a [twitter post](https://twitter.com/vm_call/status/1405937492642123782) revealed a bug in iOS Wi-Fi service:

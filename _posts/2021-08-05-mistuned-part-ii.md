@@ -1,7 +1,8 @@
 ---
 layout:	post
-title: "Mistuned Part 2: Butterfly Effect"
-image: /img/2021-08-04-mistuned-part-i/mistune.png
+title:  "Mistuned Part 2: Butterfly Effect"
+image:  /img/2021-08-04-mistuned-part-i/mistune.png
+desc:   A simple access control issue makes a huge difference, leading to infoleak and use after free.
 ---
 
 In the last post, I used a client-side XSS to get JavaScript injected to a local pre-installed app. It has no process isolation while it still supports in-process just-in-time (JIT). Any working WebKit exploit works there too, with much more access than WebContent renderer. It doesn’t even need real code execution to launch Calculator app.

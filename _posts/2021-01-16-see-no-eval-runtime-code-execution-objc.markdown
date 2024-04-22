@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "See No Eval: Runtime Dynamic Code Execution in Objective-C"
-date: 2021-01-16
-image: /img/2021-01-16-see-no-eval-runtime/headline.png
+title:  "See No Eval: Runtime Dynamic Code Execution in Objective-C"
+date:   2021-01-16
+image:  /img/2021-01-16-see-no-eval-runtime/headline.png
+desc:   There is a turing-complete querying language embeded in Objective-C hidden in plain sight.
 ---
 
 I designed the challenge [Dezhou Instrumentz](https://github.com/ChiChou/DezhouInstrumenz/) for [RealWorldCTF](https://realworldctf.com/). For further explaination I gave a talk regarding the motivation and expected solution for it:

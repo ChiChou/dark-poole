@@ -1,7 +1,8 @@
 ---
-layout:	post
-title: "Mistuned Part 1: Client-side XSS to Calculator and More"
-image: /img/2021-08-04-mistuned-part-i/mistune.png
+layout: post
+title:  "Mistuned Part 1: Client-side XSS to Calculator and More"
+image:  /img/2021-08-04-mistuned-part-i/mistune.png
+desc:   Remotely pwn iOS and pop up arbitrary app with 0 memory corruption.
 ---
 
 Ever since Pointer Authentication Code (PAC) has been introduced, iPhone remained standing for more than two years on various pwn contests until TianfuCup 2020 (Project Zero has reported a remote zero click exploit in 2019). Ant Security and Qihoo 360 used two different bug chains respectively to successfully gained remote code execution with userspace sandbox escape on iPhone 11 with iOS 14.2.

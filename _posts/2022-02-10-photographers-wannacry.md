@@ -1,7 +1,8 @@
 ---
 layout:	post
-title: "Photographers WannCry (2017)"
-image: /img/2022-02-10-photographers-wannacry/wannacry.webp
+title:  "Photographers WannCry (2017)"
+image:  /img/2022-02-10-photographers-wannacry/wannacry.webp
+desc:   The more features, the bigger attack surface. Design a WannaCry on professional DSLR cameras and make photographers cry.
 ---
 
 Back to 2017 I was still doing app pentesting. I came across that my DSLR camera has an Android subsystem and it supports photography apps, therefore I started to investigate if there is a way to pwn it. I did it.

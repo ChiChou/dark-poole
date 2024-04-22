@@ -1,7 +1,8 @@
 ---
 layout:	post
-title: "Mistuned Part 3: PAC Bypass"
-image: /img/2021-08-04-mistuned-part-i/mistune.png
+title:  "Mistuned Part 3: PAC Bypass"
+image:  /img/2021-08-04-mistuned-part-i/mistune.png
+desc:   Bypass hardware assisted mitigation using Objective-C runtime.
 ---
 
 In the previous parts, we have trigger use-after-free on Objective-C objects, and successfully refilled the dangling pointer with fully-controlled data. Now take a look at some prior research articles for further exploitation.
