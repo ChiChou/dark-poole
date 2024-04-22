@@ -15,7 +15,7 @@ They all mentioned that `isa` member of Objective-C objects is a good target for
 
 SeLector Oritned Programming (SLOP) is a technique to abuse `isa` pointer to gain arbitrary code execution under PAC protection. The idea is to abuse the gadgets in `dealloc` implementation to call `invoke` method on a controlled object. By faking a `NSInvocation` object, we can call any method with arbitrary arguments and even control pc register by giving a fake `IMP` param. To make a series of calls, there will be an `NSArray` that contains multiple `NSInvocation` objects, and the `NSArray` is used to call `makeObjectsPerformSelector` method to invoke all the `NSInvocation` objects in the array one by one.
 
-<img src="/img/2021-09-10-mistuned-part-iii/slop.svg" alt="SeLector Oriented Programming" />
+<p class="full"><img src="/img/2021-09-10-mistuned-part-iii/slop.svg" alt="SeLector Oriented Programming" /></p>
 
 To protect Objective-C runtime, iOS 14 changed the ABI and started to sign `isa` pointer. The changes were not fully implemented, so isa only got signed but was not verified. SLOP still worked on iOS 14 until 14.5 finally shipped with PAC-ed `isa`.
 
@@ -23,9 +23,9 @@ In Part II, we managed to refill the dangling pointer with controllable data, bu
 
 During TianfuCup, I was using heap spray. First I created a lot of `ArrayBuffer` objects that contain different fake `NSNumber` objects. So when I trigger the use-after-free and call `toString` on the fake `NSArray` object, it effectively tells me which `ArrayBuffer` is used to store the fake inner object.
 
-<img src="/img/2021-09-10-mistuned-part-iii/heap-spray.svg" alt="Heap Spray"/>
+<p class="full"><img src="/img/2021-09-10-mistuned-part-iii/heap-spray.svg" alt="Heap Spray"/></p>
 
-<img src="/img/2021-09-10-mistuned-part-iii/nested-array.svg" alt="Nested Array Structure"/>
+<p class="full"><img src="/img/2021-09-10-mistuned-part-iii/nested-array.svg" alt="Nested Array Structure"/></p>
 
 Heap spray is less reliable. Just few weeks after TianfuCup, I realized that I can totally get ride of it. At this moment, we already have ASLR bypass to leak arbitrary `isa` pointer and `addrof` primitive to get the heap address of `NSObject` exported to JavaScript world. Addictionaly, using `toString` on a fake `NSData` object gives a binary safe arbitrary read primitive.
 
