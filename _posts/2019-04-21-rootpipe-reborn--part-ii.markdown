@@ -1,8 +1,9 @@
 ---
 layout:	post
 title:	"Rootpipe Reborn (Part II): CVE-2019-8565 Feedback Assistant Race Condition"
-date:	2019-04-21
-image: /img/2019-04-21-rootpipe-reborn-part-ii/race.jpg
+date:	  2019-04-21
+image:  /img/2019-04-21-rootpipe-reborn-part-ii/race.jpg
+desc:   Relying on pid to validate IPC peer is unsafe.
 ---
 
 There's a general bug type on macOS. When a privileged (or loosely sandboxed) user space process accepts an IPC message from an unprivileged or sandboxed client, it decides whether the operation is valid by enforcing code signature (bundle id, authority or [entitlements](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/AboutEntitlements.html)). If such security check is based on process id, it can be bypassed via pid reuse attack.
@@ -213,15 +214,26 @@ We need more primitives.
 
 The daemon has other methods named `run*diagnoseWithDestination`. They are various external command wrappers just like those diagnose helpers mentioned from my previous post. What's interesting is that runTMDiagnoseWithDestination: acts the same as timemachinehelper , thus we can trigger the CVE-2019-8513 command injection.
 
-At first I was looking at runMDSDiagnoseWithDestination: , who launches /usr/bin/mddiagnose that will finally spawn /usr/local/bin/ddt after around 10 seconds, waiting for the /usr/bin/top command to end. Remember the previous post? This location does not exist by default and we can put custom executable with the arbitrary file copy bug.
-
-![](/img/2019-04-21-rootpipe-reborn-part-ii/t-r6124cbq4Ac4Q5CHnhNQ.png)
+At first I was looking at runMDSDiagnoseWithDestination: , who launches /usr/bin/mddiagnose that will finally spawn `/usr/local/bin/ddt` after around 10 seconds, waiting for the `/usr/bin/top` command to end. Remember the previous post? This location does not exist by default and we can put custom executable with the arbitrary file copy bug.
 
 Another exploit path is method `runMobilityReportWithDestination:`. It invokes this shell script: `/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/Resources/get-mobility-info`
 
 The script checks the existence of `/usr/local/bin/netdiagnose`. If so, execute it as root. The exploit will success within milliseconds.
 
-<p class="full"><img src="/img/2019-04-21-rootpipe-reborn-part-ii/O2buvbSU9gtM0VkB5b67FA.png"></p>
+```shell
+PCAP_STARTED=0
+if [ -x /usr/local/bin/netdiagnose -a ${NO_PCAP} -ne 1 ]; then
+  trap stop_pcap SIGINT
+  /usr/local/bin/netdiagnose -p "${WORKDIR}" start packetcapture 2>&1
+  PCAP_STARTED=1
+fi
+
+#
+# get-network-info
+#
+if [ -x /System/Library/Frameworks/SystemConfiguration.framework/Resources/get-network-info ];
+  /bin/sh /System/Library/Frameworks/SystemConfiguration.framework/Resources/get-network-info
+```
 
 By the way, I was surprised by how many diagnostic tools depending on the non-existing directory `/usr/local/bin`.
 
