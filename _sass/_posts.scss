@@ -111,10 +111,6 @@
   }
 }
 
-.excerpt {
-
-}
-
 // Meta data line below post title
 .post-date {
   display: block;
@@ -134,7 +130,7 @@
     object-fit: cover;
   }
 
-  &:hover > img {
+  &:hover img {
     transform: scale(1.05);
   }
 }

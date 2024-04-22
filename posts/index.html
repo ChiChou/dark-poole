@@ -9,7 +9,13 @@ image: /assets/home.png
   {% for post in paginator.posts %}
   <article class="post">
     {% if post.image %}
-      <p><div class="thumbnail"><img src="{{ post.image }}" alt="{{ post.title }}"></div></p>
+    <p>
+      <div class="thumbnail">
+        <a href="{{ post.url | relative_url }}">
+          <img src="{{ post.image }}" alt="{{ post.title }}">
+        </a>
+      </div>
+    </p>
     {% endif %}
 
     <h1 class="post-title">
@@ -18,14 +24,11 @@ image: /assets/home.png
       </a>
     </h1>
 
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date"
-      >{{ post.date | date_to_string }}</time
-    >
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
 
     <div class="excerpt">
       {{ post.desc }}
     </div>
-    <a href="{{ post.url }}" class="post-more">Continue Reading</a>
   </article>
   {% endfor %}
 </div>
