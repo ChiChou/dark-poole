@@ -8,14 +8,14 @@ image: /assets/home.png
 <style type="text/css">
   html,
   body {
-    background: #222 no-repeat center center;
-    background-size: cover;
-    background-image: image-set(url('/assets/bg.avif') type("image/avif"),
-        url('/assets/bg.webp') type("image/webp"));
     min-height: 100vh;
   }
 
   body {
+    background: #222 no-repeat right center;
+    background-size: cover;
+    background-image: image-set(url('/assets/IMG_2771.avif') type("image/avif"),
+        url('/assets/IMG_2771.webp') type("image/webp"));
     display: flex;
     flex-direction: column;
   }
@@ -23,12 +23,6 @@ image: /assets/home.png
 
 <main class="home">
   <section>
-    <picture class="avatar">
-      <source srcset="/assets/portrait.webp" type="image/webp">
-      <source srcset="/assets/portrait.avif" type="image/avif">
-      <img src="/assets/portrait.jpg" alt="Portrait of @codecolorist">
-    </picture>
-
     <p>
       Hey, I'm <a href="https://infosec.exchange/@codecolorist" target="_blank">@codecolorist</a>,
       a software engineerer and amateur photographer based in Europe.

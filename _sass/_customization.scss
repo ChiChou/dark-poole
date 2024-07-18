@@ -26,13 +26,23 @@
 }
 
 main.home {
-  align-items: center;
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: var(--spacer-3);
   justify-content: center;
-  text-align: center;
+  margin: var(--spacer-3);
+
+  @media screen and (max-width: 800px) {
+    text-align: center;
+  }
+
+  @media screen and (min-width: 800px) and (max-width: 1600px) {
+    margin-left: 10em;
+  }
+
+  @media screen and (min-width: 1600px) {
+    margin-left: 20em;
+  }
 
   p {
     margin-bottom: .75rem;
@@ -41,18 +51,22 @@ main.home {
 
     @media screen and (max-width: 800px) {
       max-width: 480px;
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
 
     @media screen and (min-width: 800px) and (max-width: 1600px) {
       max-width: 540px;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
     }
 
     @media screen and (min-width: 1600px) {
       max-width: 800px;
-      font-size: 1.75rem;
+      font-size: 2rem;
     }
+  }
+
+  nav, section {
+    margin-bottom: 1em;
   }
 
   nav a > img {
@@ -83,33 +97,6 @@ main.home {
 
     section {
       margin-bottom: 3rem;
-    }
-  }
-
-  picture.avatar {
-    img {
-      display: block;
-      margin: 4rem auto;
-
-      opacity: .85;
-      transition: .2s ease-out opacity;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      @media screen and (max-width: 800px) {
-        height: 160px;
-        width: 160px;
-      }
-
-      @media screen and (min-width: 800px) {
-        height: 200px;
-        width: 200px;
-        margin-bottom: 8rem;
-      }
-
-      border-radius: 50%;
     }
   }
 
