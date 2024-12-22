@@ -36,16 +36,16 @@ main.home {
     justify-content: flex-end;
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 799px) {
     text-align: center;
   }
 
-  @media screen and (min-width: 800px) and (max-width: 1600px) {
+  @media screen and (min-width: 800px) and (max-width: 1799px) {
     margin-left: 10em;
   }
 
-  @media screen and (min-width: 1600px) {
-    margin-left: 20em;
+  @media screen and (min-width: 1800px) {
+    margin-left: 16em;
   }
 
   p {
@@ -53,17 +53,17 @@ main.home {
     color: #fff;
     text-shadow: 1px 1px 1px var(--gray-900);
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 799px) {
       max-width: 480px;
       font-size: 1.25rem;
     }
 
-    @media screen and (min-width: 800px) and (max-width: 1600px) {
+    @media screen and (min-width: 800px) and (max-width: 1799px) {
       max-width: 540px;
       font-size: 1.5rem;
     }
 
-    @media screen and (min-width: 1600px) {
+    @media screen and (min-width: 1799px) {
       max-width: 800px;
       font-size: 2rem;
     }
